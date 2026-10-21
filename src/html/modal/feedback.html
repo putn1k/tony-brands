@@ -1,0 +1,49 @@
+<div class="hystmodal modal"
+     id="feedback-modal"
+     aria-hidden="true">
+  <div class="hystmodal__wrap hystmodal__wrap--full">
+    <div class="hystmodal__window hystmodal__window--full"
+         role="dialog"
+         data-lenis-prevent
+         aria-modal="true">
+      <div class="modal__content">
+        <button class="modal__cross"
+                type="button"
+                aria-label="Закрыть окно"
+                data-hystclose>
+        </button>
+        <div class="modal__content-wrapper">
+          <p class="t1 modal__title">Заголовок для заявки</p>
+
+          <div class="modal__col">
+            <p class="t4 modal__text">Заполните форму и мы отправим расчёт вам на почту</p>
+            <form class="modal__form"
+                  action=""
+                  id="consult-form"
+                  data-validate>
+              @include('../blocks/field.html', {type:'text', name: 'Ваше имя', validate: ''})
+              @include('../blocks/field.html', {type:'tel', name: 'Ваш телефон', validate: 'phone'})
+              @include('../blocks/field.html', {type:'email', name: 'Почта', validate: 'email'})
+              <div class="t6">
+                <label class="form-change">
+                  <input class="form-change__input"
+                         type="checkbox"
+                         data-validate="confirm"
+                         required>
+                  <span class="form-change__label">@include('../blocks/confirm-text.html')</span>
+                </label>
+              </div>
+              <div>
+                <button class="btn btn--prim modal__form-submit"
+                        type="submit">отправить заявку</button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>

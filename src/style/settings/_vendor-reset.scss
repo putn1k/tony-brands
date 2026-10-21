@@ -1,0 +1,36 @@
+.swiper-slide {
+  height: var(--swiper-height, 100%);
+}
+
+.hystmodal {
+  color: var(--white);
+
+  &::before {
+    background-color: var(--dark);
+  }
+
+  &--active {
+    &::before {
+      opacity: 0.9;
+    }
+  }
+
+  &__wrap {
+    &--full {
+      display: grid;
+      grid-row: -1 / 1;
+    }
+  }
+
+  &__window {
+    width: 100%;
+    max-width: var(--modal-width, 400px);
+    background: none;
+
+    &--full {
+      grid-row: -1 / 1;
+      max-width: none;
+      margin: 0;
+    }
+  }
+}

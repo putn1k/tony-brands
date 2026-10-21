@@ -1,0 +1,140 @@
+.form-field {
+  position: relative;
+  display: flex;
+  flex-direction: column-reverse;
+  overflow: hidden;
+
+  &__input {
+    @include input-base;
+
+    &--area {
+      @include area-base;
+    }
+
+    color: var(--white);
+    background-color: var(--dark);
+    font-weight: 500;
+    border: 1px solid var(--dark-50);
+    border-radius: 0;
+    padding: 18px 24px;
+    padding-top: 42px;
+    outline: none;
+    transition: color var(--duration-fast) ease-in-out,
+    border-color var(--duration-fast) ease-in-out,
+    background-position var(--duration-default) ease-in-out;
+
+    @include any-hover {
+      &.focus-visible {
+        border-color: var(--white);
+      }
+    }
+
+    &.is-invalid {
+      border-color: var(--orange);
+    }
+  }
+
+  &__label {
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    opacity: 0.5;
+    transition: var(--duration-fast) ease-in-out;
+    transition-property: color;
+  }
+
+  .error-massage {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 2px 24px;
+    pointer-events: none;
+    opacity: 0.7;
+  }
+}
+
+.form-change {
+  $this: &;
+
+  &+.error-massage {
+    @include visually-hidden;
+  }
+
+  &__input {
+    @include visually-hidden;
+
+    @include any-hover {
+      &:hover {
+        &+#{$this}__label {
+          &::before {
+            border-color: var(--orange);
+            background-color: var(--orange-90);
+          }
+        }
+      }
+    }
+
+    &.focus-visible {
+      &+#{$this}__label {
+        &::before {
+          border-color: var(--orange-50);
+        }
+      }
+    }
+
+    &:checked {
+      &[type="checkbox"]+#{$this}__label {
+        &::before {
+          background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_617_8172)'%3E%3Cpath d='M11.647 2.27305C11.8643 2.45522 11.9911 2.70645 11.9995 2.97152C12.008 3.23658 11.8974 3.49377 11.6921 3.68655L5.30199 9.68724C5.19843 9.78432 5.07397 9.86201 4.93598 9.91571C4.79799 9.96941 4.64927 9.99804 4.49859 9.9999C4.34791 10.0018 4.19835 9.97683 4.05872 9.92656C3.91909 9.8763 3.79224 9.80172 3.68566 9.70724L0.302654 6.7069C0.103463 6.51731 -0.00497884 6.26655 0.000175687 6.00745C0.00533022 5.74835 0.123678 5.50115 0.330287 5.31791C0.536896 5.13467 0.815634 5.02971 1.10778 5.02514C1.39992 5.02056 1.68266 5.11674 1.89643 5.2934L4.46 7.56566L10.0532 2.31306C10.2586 2.12036 10.5419 2.0079 10.8408 2.0004C11.1397 1.9929 11.4297 2.09097 11.647 2.27305Z' fill='%23B22322'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_617_8172'%3E%3Crect width='12' height='12' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A");
+        }
+      }
+    }
+
+    &.is-invalid {
+      &+#{$this}__label {
+        &::before {
+          border-color: var(--orange);
+          background-color: var(--orange);
+        }
+      }
+    }
+  }
+
+  &__label {
+    color: var(--dark-50);
+    cursor: pointer;
+    user-select: none;
+
+    & a {
+      color: inherit;
+
+      @include any-hover {
+        transition: var(--duration-fast) ease-in-out;
+        transition-property: color;
+
+        &:hover {
+          color: var(--orange);
+        }
+      }
+    }
+
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 1.4em;
+      height: 1.4em;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 0.75em 0.75em;
+      border: 1px solid var(--dark-75);
+      transform: translateY(0.1em);
+      margin-right: 0.8em;
+
+      @include any-hover {
+        transition: var(--duration-fast) ease-in-out;
+        transition-property: background-color, border-color;
+      }
+    }
+  }
+}

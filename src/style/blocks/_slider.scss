@@ -1,0 +1,14 @@
+.slider {
+  position: relative;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+
+  &:not(.swiper-initialized) {
+    opacity: 0;
+  }
+
+  &__wrapper {
+    box-sizing: border-box;
+  }
+}

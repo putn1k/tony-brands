@@ -1,0 +1,33 @@
+.btn {
+  --link-line: transparent;
+
+  @include btn-reset;
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: clamp(1.4rem, 1.54rem + 0.16vw, 1.8rem);
+  font-weight: 500;
+  padding: 12px 32px;
+
+  @include any-hover {
+    transition: var(--transition-default);
+    transition-property: color, background-color;
+  };
+
+  @include media-min ( $lg ) {
+    padding: 16px 64px;
+  }
+
+  &--prim {
+    color: var(--black);
+    background-color: var(--white);
+
+    @include any-hover {
+      &:hover {
+        color: var(--white);
+        background-color: var(--red);
+      }
+    }
+  }
+}
