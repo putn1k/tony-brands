@@ -99,7 +99,7 @@ const initGSAPAnimation = () => {
 
       onSplit(self) {
         return gsap.from(self.lines, {
-          yPercent: 100,
+          yPercent: 120,
           duration: 1.4,
           stagger: 0.15,
           ease: "power3.out",
