@@ -108,9 +108,6 @@ const initGSAPAnimation = () => {
             start: "top 85%",
             toggleActions: "play none none none",
           },
-          onComplete: () => {
-            element.classList.add("is-complete");
-          },
         });
       },
     });

@@ -39,10 +39,6 @@
     line-height: 1.1;
     font-weight: 400;
     text-transform: uppercase;
-
-    &.is-complete {
-      --display-arrow: inline-flex;
-    }
   }
 
   &__text {
@@ -66,10 +62,8 @@
     justify-content: flex-end;
 
     &::before {
-      @include anim(fade-left, 0.5s);
-
       content: '';
-      display: var(--display-arrow, none);
+      display: inline-flex;
       width: 2.25em;
       height: 0.75em;
       margin-right: 24px;
