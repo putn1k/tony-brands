@@ -1,0 +1,55 @@
+.features {
+  padding: 96px 0;
+
+  @include media-min ( $xl ) {
+    padding: 128px 0;
+  }
+
+  &__title {
+    margin: 0;
+    margin-bottom: 64px;
+    max-width: 1440px;
+
+    @include media-min ( $xl ) {
+      margin-bottom: 96px;
+    }
+
+    &--gray {
+      color: var(--gray-light);
+    }
+  }
+
+  &__item {
+    margin-bottom: 32px;
+
+    @include media-min ( $xl ) {
+      display: grid;
+      grid-template-columns: 40% 60%;
+      column-gap: 30px;
+      align-items: center;
+    }
+  }
+
+  &__loading {
+    display: none;
+
+    @include media-min ( $xl ) {
+      display: block;
+    }
+  }
+
+  &__item-title {
+    margin: 0;
+    margin-bottom: 18px;
+
+    &::before {
+      content: '// ';
+      color: var(--red);
+    }
+  }
+  &__item-text {
+    margin: 0;
+    color: var(--gray-dark);
+  }
+
+}
