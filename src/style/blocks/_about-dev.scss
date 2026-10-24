@@ -1,0 +1,37 @@
+.about-dev {
+  padding: 48px 0 96px;
+
+  @include media-min ( $xl ) {
+    padding: 64px 0 128px;
+  }
+
+  &__title {
+    margin: 0;
+    margin-bottom: 32px;
+  }
+
+  &__accent-text {
+    color: var(--gray-light);
+  }
+
+  &__subtitle {
+    margin: 0;
+    margin-bottom: 32px;
+    max-width: 1220px;
+  }
+
+  &__text {
+    margin: 0;margin-bottom: 32px;
+    color: var(--gray-dark);
+    max-width: 768px;
+  }
+
+  &__cards {
+    display: grid;
+    gap: 20px;
+
+    @include media-min ( $lg ) {
+      display: flex;
+    }
+  }
+}

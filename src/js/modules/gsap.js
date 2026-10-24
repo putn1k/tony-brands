@@ -92,6 +92,8 @@ const initGSAPAnimation = () => {
 
   // split animation
   document.querySelectorAll('[data-split]').forEach( element => {
+    const duration = element.dataset.animDuration ? ( parseInt( element.dataset.animDuration, 10 ) / 1000 ) : '2.5';
+
     SplitText.create(element, {
       type: "lines",
       mask: "lines",
@@ -100,7 +102,7 @@ const initGSAPAnimation = () => {
       onSplit(self) {
         return gsap.from(self.lines, {
           yPercent: 120,
-          duration: 1.4,
+          duration: duration,
           stagger: 0.15,
           ease: "power3.out",
           scrollTrigger: {
@@ -112,6 +114,54 @@ const initGSAPAnimation = () => {
       },
     });
   });
+
+  // marquee animation
+  document.querySelectorAll('.gsap-marquee').forEach((marquee) => {
+    const track = marquee.querySelector('.gsap-marquee__track');
+    const group = marquee.querySelector('.gsap-marquee__group');
+
+    const clone = group.cloneNode(true);
+    clone.setAttribute('aria-hidden', 'true');
+    track.appendChild(clone);
+
+    const speed = (marquee.dataset.marqueeSpeed && marquee.dataset.marqueeSpeed != '') ? parseInt( marquee.dataset.marqueeSpeed, 10 ) : 60;
+
+    const init = () => {
+      const groupWidth = group.offsetWidth;
+
+      gsap.to(track, {
+        xPercent: -50,
+        duration: groupWidth / speed,
+        ease: 'none',
+        repeat: -1,
+        overwrite: true
+      });
+    };
+
+    const images = marquee.querySelectorAll('img');
+    const loaded = Array.from(images).map((img) =>
+      img.complete
+        ? Promise.resolve()
+        : new Promise((resolve) => {
+            img.addEventListener('load', resolve, { once: true });
+            img.addEventListener('error', resolve, { once: true });
+          })
+    );
+
+    Promise.all(loaded).then(init);
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+
+      resizeTimer = setTimeout(() => {
+        gsap.killTweensOf(track);
+        gsap.set(track, { xPercent: 0 });
+        init();
+      }, 200);
+    });
+  });
+
 };
 
 export {

@@ -30,4 +30,50 @@
       }
     }
   }
+
+  &--third {
+    color: var(--white);
+    background-color: var(--gray-dark);
+
+    @include any-hover {
+      &:hover {
+        background-color: var(--black);
+      }
+    }
+  }
+
+  &--arrow {
+    position: relative;
+    padding: 16px 48px;
+    padding-right: 112px;
+    width: 100%;
+    justify-content: flex-start;
+
+    &::after {
+      content: '';
+      position: absolute;
+      right: 48px;
+      top: 50%;
+      transform: translateY(-50%);
+      background-image: url("data:image/svg+xml,%3Csvg width='295' height='88' viewBox='0 0 295 88' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 44.2382H275' stroke-width='4' stroke='%23F7F7F7'/%3E%3Cpath d='M204.843 0.237911C206.58 14.7344 227.04 43.7275 294.982 43.7275' stroke-width='4' stroke='%23F7F7F7'/%3E%3Cpath d='M204.843 87.2172C206.58 72.7206 227.04 43.7276 294.982 43.7276' stroke-width='4' stroke='%23F7F7F7'/%3E%3C/svg%3E%0A");
+      background-repeat: no-repeat;
+      background-position: center right;
+      background-size: contain;
+      width: 100%;
+      height: 33%;
+    }
+
+    @include any-hover {
+      &::after {
+        transition: var(--transition-default);
+        transition-property: transform;
+      }
+
+      &:hover {
+        &::after {
+          transform: translate(12px, -50%);
+        }
+      }
+    }
+  }
 }

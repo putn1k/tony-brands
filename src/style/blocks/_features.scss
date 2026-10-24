@@ -1,8 +1,8 @@
 .features {
-  padding: 96px 0;
+  padding: 96px 0 48px;
 
   @include media-min ( $xl ) {
-    padding: 128px 0;
+    padding: 128px 0 64px;
   }
 
   &__title {
@@ -13,10 +13,10 @@
     @include media-min ( $xl ) {
       margin-bottom: 96px;
     }
+  }
 
-    &--gray {
-      color: var(--gray-light);
-    }
+  &__accent-text {
+    color: var(--gray-light);
   }
 
   &__item {
@@ -50,6 +50,16 @@
   &__item-text {
     margin: 0;
     color: var(--gray-dark);
+  }
+
+  &__marquee {
+    margin-top: 96px;
+    padding: 32px 0 0;
+
+    @include media-min ( $xl ) {
+      margin-top: 128px;
+      padding: 64px 0 0;
+    }
   }
 
 }
