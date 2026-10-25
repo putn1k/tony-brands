@@ -243,15 +243,15 @@ const initGSAPAnimation = () => {
     } );
 
     const getScrollDistance = () => {
-      const overflow = track.scrollWidth - cards.clientWidth + trackOffsetRight;
+      const overflow = track.scrollWidth - cards.clientWidth;
       return overflow > 0 ? overflow : 0;
     };
 
     gsap.to(track, {
-      x: () => -getScrollDistance(),
+      x: () => -getScrollDistance() - trackOffsetRight,
       ease: 'none',
       scrollTrigger: {
-        trigger: cards,
+        trigger: document.querySelector('.about-production'),
         pin: true,
         scrub: 1,
         anticipatePin: 1,

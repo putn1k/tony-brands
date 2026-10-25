@@ -52,7 +52,7 @@
   &__btn {
     padding-left: 0;
     padding-right: 80px;
-    max-width: 345px;
+    font-size: clamp(1.4rem, 1.54rem + 0.16vw, 1.6rem);
     color: var(--gray);
     flex-grow: 1;
 
