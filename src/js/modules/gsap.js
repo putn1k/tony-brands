@@ -4,6 +4,8 @@ import { SplitText } from "gsap/SplitText.js";
 
 gsap.registerPlugin( ScrollTrigger, SplitText );
 
+const gsapMatchMedia = gsap.matchMedia();
+
 const initGSAPAnimation = () => {
   // scroll animation
   document.querySelectorAll( '[data-anim]' ).forEach( ( element ) => {
@@ -232,11 +234,16 @@ const initGSAPAnimation = () => {
   (function () {
     const cards = document.querySelector('.about-production__cards');
     const track = document.querySelector('.about-production__cards-track');
+    let trackOffsetRight = 15;
 
     if (!cards || !track) return;
 
+    gsapMatchMedia.add( '(min-width: 1300px)', () => {
+      trackOffsetRight = 64;
+    } );
+
     const getScrollDistance = () => {
-      const overflow = track.scrollWidth - cards.clientWidth + 64;
+      const overflow = track.scrollWidth - cards.clientWidth + trackOffsetRight;
       return overflow > 0 ? overflow : 0;
     };
 
