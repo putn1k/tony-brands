@@ -54,7 +54,7 @@ h6 {
 
 .h1 {
   font-family: "Dela Gothic One", Arial, Helvetica, sans-serif;
-  font-size: clamp(3.4rem, 2.5rem + 3vw, 5.8rem);
+  font-size: clamp(3rem, 2rem + 2.6vw, 5.8rem);
   line-height: 1.2;
   font-weight: 400;
   text-transform: uppercase;
@@ -62,7 +62,7 @@ h6 {
 
 .h2 {
   font-family: "Cera Pro", Arial, Helvetica, sans-serif;
-  font-size: clamp(2.4rem, 2rem + 2.2vw, 3.4rem);
+  font-size: clamp(2.4rem, 1.4rem + 1.2vw, 3.4rem);
   line-height: 1.1;
   font-weight: 500;
 }
@@ -94,7 +94,7 @@ h6 {
   position: relative;
   display: inline-block;
   white-space: nowrap;
-  z-index: -1;
+  z-index: 0;
   isolation: isolate;
 
   &::after {

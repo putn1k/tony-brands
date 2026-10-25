@@ -124,44 +124,137 @@ const initGSAPAnimation = () => {
     clone.setAttribute('aria-hidden', 'true');
     track.appendChild(clone);
 
-    const speed = (marquee.dataset.marqueeSpeed && marquee.dataset.marqueeSpeed != '') ? parseInt( marquee.dataset.marqueeSpeed, 10 ) : 60;
+    const baseSpeed = (marquee.dataset.marqueeSpeed && marquee.dataset.marqueeSpeed != '') ? parseInt( marquee.dataset.marqueeSpeed, 10 ) : 60;
 
-    const init = () => {
-      const groupWidth = group.offsetWidth;
+    if (marquee.classList.contains('is-boosted-marquee')) {
+      const maxBoost = 100;
+      const returnDelay = 0.7;
 
-      gsap.to(track, {
-        xPercent: -50,
-        duration: groupWidth / speed,
-        ease: 'none',
-        repeat: -1,
-        overwrite: true
+      let groupWidth = 0;
+      let x = 0;
+      let direction = -1;
+      let currentSpeed = baseSpeed;
+      let returnTween;
+      let resizeTimer;
+
+      function measure() {
+        groupWidth = group.offsetWidth;
+
+        if (groupWidth) {
+          x = gsap.utils.wrap(-groupWidth, 0, x);
+          gsap.set(track, { x: x });
+        }
+      }
+
+      measure();
+
+      window.addEventListener('load', measure);
+
+      gsap.ticker.add((time, deltaTime) => {
+        if (!groupWidth) return;
+
+        x += direction * currentSpeed * (deltaTime / 1000);
+
+        x = gsap.utils.wrap(-groupWidth, 0, x);
+
+        gsap.set(track, { x: x });
       });
-    };
 
-    const images = marquee.querySelectorAll('img');
-    const loaded = Array.from(images).map((img) =>
-      img.complete
-        ? Promise.resolve()
-        : new Promise((resolve) => {
-            img.addEventListener('load', resolve, { once: true });
-            img.addEventListener('error', resolve, { once: true });
-          })
-    );
+      ScrollTrigger.create({
+        trigger: document.body,
+        start: 'top top',
+        end: 'bottom bottom',
+        onUpdate: (self) => {
+          const velocity = self.getVelocity();
 
-    Promise.all(loaded).then(init);
+          if (Math.abs(velocity) < 5) return;
 
-    let resizeTimer;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimer);
+          direction = velocity > 0 ? -1 : 1;
 
-      resizeTimer = setTimeout(() => {
-        gsap.killTweensOf(track);
-        gsap.set(track, { xPercent: 0 });
-        init();
-      }, 200);
-    });
+          const boost = gsap.utils.clamp( 1, maxBoost, 1 + Math.abs(velocity) / 100 );
+
+          currentSpeed = baseSpeed * boost;
+
+          if (returnTween) returnTween.kill();
+
+          returnTween = gsap.delayedCall(returnDelay, () => {
+            currentSpeed = baseSpeed;
+          });
+        }
+      });
+
+      const observer = new ResizeObserver(() => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(measure, 200);
+      });
+
+      observer.observe(document.documentElement);
+    } else {
+      let resizeTimer;
+
+      const init = () => {
+        const groupWidth = group.offsetWidth;
+        gsap.to(track, {
+          xPercent: -50,
+          duration: groupWidth / baseSpeed,
+          ease: 'none',
+          repeat: -1,
+          overwrite: true
+        });
+      };
+
+      const images = marquee.querySelectorAll('img');
+      const loaded = Array.from(images).map((img) =>
+        img.complete
+          ? Promise.resolve()
+          : new Promise((resolve) => {
+              img.addEventListener('load', resolve, { once: true });
+              img.addEventListener('error', resolve, { once: true });
+            })
+      );
+
+      Promise.all(loaded).then(init);
+
+      const observer = new ResizeObserver(() => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          gsap.killTweensOf(track);
+          gsap.set(track, { xPercent: 0 });
+          init();
+        }, 200);
+      });
+
+      observer.observe(marquee);
+    }
+
   });
 
+  (function () {
+    const cards = document.querySelector('.about-production__cards');
+    const track = document.querySelector('.about-production__cards-track');
+
+    if (!cards || !track) return;
+
+    const getScrollDistance = () => {
+      const overflow = track.scrollWidth - cards.clientWidth + 64;
+      return overflow > 0 ? overflow : 0;
+    };
+
+    gsap.to(track, {
+      x: () => -getScrollDistance(),
+      ease: 'none',
+      scrollTrigger: {
+        trigger: cards,
+        pin: true,
+        scrub: 1,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        start: 'center center',
+        end: () => '+=' + getScrollDistance(),
+        pinSpacing: true,
+      },
+    });
+  })();
 };
 
 export {

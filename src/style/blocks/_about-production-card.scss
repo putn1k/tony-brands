@@ -1,0 +1,37 @@
+.about-production-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 24px;
+  padding-right: 48px;
+  color: var(--black);
+  background-color: var(--white);
+  width: 340px;
+  aspect-ratio: 5 / 3;
+
+  @include media-min ( $xl ) {
+    width: 420px;
+    padding-right: 64px;
+  }
+
+  @include media-min ( 1920px ) {
+    width: 500px;
+    padding-right: 96px;
+  }
+
+  &__title {
+    margin: 0;
+    margin-bottom: 8px;
+    font-size: clamp(2rem, 0.5rem + 0.9vw, 2.4rem);
+
+    &::before {
+      content: '// ';
+      color: var(--red);
+    }
+  }
+
+  &__text {
+    margin: 0;
+  }
+}
