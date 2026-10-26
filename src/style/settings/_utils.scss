@@ -55,3 +55,15 @@ input[type="file"].visually-hidden {
   pointer-events: none;
   user-select: none;
 }
+
+.is-color-hover {
+  @include any-hover {
+    filter: grayscale(1) contrast(0.25) brightness(0.75) opacity(0.4);
+    transition: var(--transition-default);
+    transition-property: filter;
+
+    &:hover {
+      filter: revert;
+    }
+  };
+}

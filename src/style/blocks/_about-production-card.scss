@@ -28,6 +28,11 @@
   @include media-min ( 1920px ) {
     width: 500px;
     padding-right: 96px;
+
+    &--link {
+      padding: 16px;
+      padding-bottom: 0;
+    }
   }
 
   &__title {
@@ -52,7 +57,7 @@
   &__btn {
     padding-left: 0;
     padding-right: 80px;
-    font-size: clamp(1.4rem, 1.54rem + 0.16vw, 1.6rem);
+    font-size: clamp(1.6rem, 0.5rem + 0.8vw, 2.4rem);
     color: var(--gray);
     flex-grow: 1;
 

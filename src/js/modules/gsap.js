@@ -1,4 +1,5 @@
 import gsap from 'gsap';
+import { _horizontal } from 'gsap/Observer.js';
 import ScrollTrigger from 'gsap/ScrollTrigger.js';
 import { SplitText } from "gsap/SplitText.js";
 
@@ -231,12 +232,15 @@ const initGSAPAnimation = () => {
 
   });
 
+  // custom horizontal scroll
   (function () {
-    const cards = document.querySelector('.about-production__cards');
-    const track = document.querySelector('.about-production__cards-track');
+    const block = document.querySelector('.about-production');
+    if ( !block ) return;
+    const cards = block.querySelector('.about-production__cards');
+    const track = block.querySelector('.about-production__cards-track');
     let trackOffsetRight = 15;
 
-    if (!cards || !track) return;
+    if ( !cards || !track) return;
 
     gsapMatchMedia.add( '(min-width: 1300px)', () => {
       trackOffsetRight = 64;
@@ -251,7 +255,7 @@ const initGSAPAnimation = () => {
       x: () => -getScrollDistance() - trackOffsetRight,
       ease: 'none',
       scrollTrigger: {
-        trigger: document.querySelector('.about-production'),
+        trigger: block,
         pin: true,
         scrub: 1,
         anticipatePin: 1,
