@@ -130,7 +130,7 @@ const initGSAPAnimation = () => {
     const baseSpeed = (marquee.dataset.marqueeSpeed && marquee.dataset.marqueeSpeed != '') ? parseInt( marquee.dataset.marqueeSpeed, 10 ) : 60;
 
     if (marquee.classList.contains('is-boosted-marquee')) {
-      const maxBoost = 100;
+      const maxBoost = 200;
       const returnDelay = 0.7;
 
       let groupWidth = 0;

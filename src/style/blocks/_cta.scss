@@ -1,0 +1,25 @@
+.cta {
+  color: var(--white);
+  background-color: var(--black);
+  background-image: url('../img/static/gradient.webp');
+  background-repeat: no-repeat;
+  background-position: top left;
+  background-size: cover;
+  padding: 96px 0;
+  //temp
+  height: 600px;
+
+
+  @include media-min ( $xl ) {
+    padding: 128px 0;
+  }
+
+  &__alt-color {
+    color: var(--gray);
+  }
+
+  &__title {
+    margin: 0;
+    margin-bottom: 32px;
+  }
+}
