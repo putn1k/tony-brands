@@ -1,2 +1,142 @@
 .site-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 20;
+
+  &__banner {
+    color: var(--white);
+    background-color: var(--black);
+    padding: 8px 0;
+
+    @include media-min ( $xl ) {
+      padding: 12px 0;
+    }
+  }
+
+  &__banner-content {
+    @include crop-offset;
+
+    text-align: center;
+  }
+
+  &__main {
+    width: 100%;
+    padding: 20px 0;
+    transition: var(--transition-default);
+    transition-property: background-color;
+
+    @include media-min ( $md ) {
+      padding: 16px 0;
+    }
+
+    &.is-fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 20;
+      background-color: var(--black-60);
+    }
+  }
+}
+
+.header-main {
+  display: flex;
+  align-items: center;
+
+  @include media-min ( $md ) {
+    justify-content: space-between;
+  }
+
+  &__left {
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    align-items: center;
+
+    @include media-min ( $md ) {
+      flex-direction: row;
+      flex-grow: revert;
+    }
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+  }
+
+  &__burger {
+    @include btn-reset;
+
+    width: 44px;
+    height: 18px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-image: url("data:image/svg+xml,%3Csvg width='44' height='18' viewBox='0 0 44 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 1H44' stroke-width='2' stroke='%23C6C6C6'/%3E%3Cpath d='M0 9H44' stroke-width='2' stroke='%23C6C6C6'/%3E%3Cpath d='M0 17H44' stroke-width='2' stroke='%23C6C6C6'/%3E%3C/svg%3E%0A");
+
+    @include any-hover {
+      transition: var(--transition-default);
+      transition-property: transform;
+
+      &:hover {
+        transform: scaleY(1.35);
+      }
+    }
+
+    @include media-min ( $md ) {
+      margin-right: 32px;
+    }
+  }
+
+  &__logo {
+    display: flex;
+  }
+
+  &__menu {
+    @include list-reset;
+
+    --link-line: transparent;
+
+    display: none;
+    color: var(--white);
+    font-size: clamp(1.6rem, 1.1rem + 0.9vw, 1.8rem);
+    line-height: 1.4;
+    font-weight: 500;
+
+    & ul {
+      display: none;
+    }
+
+    &>li {
+      margin-left: 32px;
+    }
+
+    & a {
+      @include any-hover {
+        transition: var(--transition-default);
+        transition-property: text-decoration-color;
+
+        &:hover {
+          --link-line: currentColor;
+        }
+      }
+    }
+
+    @include media-min ( 1600px ) {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &__btn {
+    display: none;
+
+    @include media-min ( $md ) {
+      display: inline-flex;
+      margin-left: 32px;
+    }
+  }
 }

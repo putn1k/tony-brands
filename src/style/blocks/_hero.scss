@@ -1,11 +1,11 @@
 .hero {
   color: var(--white);
   background-color: var(--red);
-  padding-top: 96px;
+  padding-top: 192px;
   padding-bottom: 96px;
   min-height: 568px;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
 
   @include media-min ($xl ) {
     min-height: 768px;

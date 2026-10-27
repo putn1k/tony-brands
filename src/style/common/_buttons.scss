@@ -31,6 +31,17 @@
     }
   }
 
+  &--sec {
+    color: var(--white);
+    background-color: var(--black);
+
+    @include any-hover {
+      &:hover {
+        background-color: var(--red);
+      }
+    }
+  }
+
   &--third {
     color: var(--white);
     background-color: var(--gray-dark);
