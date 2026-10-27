@@ -130,8 +130,8 @@ const initGSAPAnimation = () => {
     const baseSpeed = (marquee.dataset.marqueeSpeed && marquee.dataset.marqueeSpeed != '') ? parseInt( marquee.dataset.marqueeSpeed, 10 ) : 60;
 
     if (marquee.classList.contains('is-boosted-marquee')) {
-      const maxBoost = 200;
-      const returnDelay = 0.7;
+      const maxBoost = (marquee.dataset.marqueeBoost && marquee.dataset.marqueeBoost != '') ? parseFloat(marquee.dataset.marqueeBoost) * 100 : 100;
+      const returnDelay = 0.1;
 
       let groupWidth = 0;
       let x = 0;
@@ -139,6 +139,8 @@ const initGSAPAnimation = () => {
       let currentSpeed = baseSpeed;
       let returnTween;
       let resizeTimer;
+      let lastScrollY = window.scrollY;
+      let lastScrollTime = performance.now();
 
       function measure() {
         groupWidth = group.offsetWidth;
@@ -151,8 +153,6 @@ const initGSAPAnimation = () => {
 
       measure();
 
-      window.addEventListener('load', measure);
-
       gsap.ticker.add((time, deltaTime) => {
         if (!groupWidth) return;
 
@@ -163,35 +163,40 @@ const initGSAPAnimation = () => {
         gsap.set(track, { x: x });
       });
 
-      ScrollTrigger.create({
-        trigger: document.body,
-        start: 'top top',
-        end: 'bottom bottom',
-        onUpdate: (self) => {
-          const velocity = self.getVelocity();
+      const scrollBoost = () => {
+        const now = performance.now();
+        const scrollY = window.scrollY;
+        const deltaY = scrollY - lastScrollY;
+        const deltaTime = now - lastScrollTime;
 
-          if (Math.abs(velocity) < 5) return;
-
+        if (deltaTime > 0 && Math.abs(deltaY) > 0) {
+          const velocity = (deltaY / deltaTime) * 10 * maxBoost;
           direction = velocity > 0 ? -1 : 1;
-
-          const boost = gsap.utils.clamp( 1, maxBoost, 1 + Math.abs(velocity) / 100 );
-
+          const boost = gsap.utils.clamp(
+            1,
+            maxBoost,
+            1 + Math.abs(velocity) / 100
+          );
           currentSpeed = baseSpeed * boost;
-
           if (returnTween) returnTween.kill();
-
           returnTween = gsap.delayedCall(returnDelay, () => {
             currentSpeed = baseSpeed;
           });
         }
-      });
+
+        lastScrollY = scrollY;
+        lastScrollTime = now;
+      };
+
+      window.addEventListener('load', measure);
+      window.addEventListener('scroll', scrollBoost, { passive: true });
 
       const observer = new ResizeObserver(() => {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(measure, 200);
       });
 
-      observer.observe(document.documentElement);
+      observer.observe(marquee);
     } else {
       let resizeTimer;
 

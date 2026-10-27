@@ -17,6 +17,7 @@ import {
 import {
   initGSAPAnimation
 } from './gsap.js';
+import { initFilters } from './filter-list.js';
 
 
 const lenisScroll = new Lenis( smoothScrollConfig.lenis );
@@ -36,6 +37,7 @@ const initSiteSettings = () => {
   [ '[data-gallery]' ].map( ( item ) => baguetteBox.run( item ) );
   initGSAPAnimation();
   requestAnimationFrame( reloadScroll );
+  // initFilters();
 };
 
 export {
