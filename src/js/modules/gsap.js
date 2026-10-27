@@ -123,9 +123,13 @@ const initGSAPAnimation = () => {
     const track = marquee.querySelector('.gsap-marquee__track');
     const group = marquee.querySelector('.gsap-marquee__group');
 
-    const clone = group.cloneNode(true);
-    clone.setAttribute('aria-hidden', 'true');
-    track.appendChild(clone);
+    const createClone = ( el, container ) => {
+      const clone = group.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      track.appendChild(clone);
+    };
+
+    createClone( group, track );
 
     const baseSpeed = (marquee.dataset.marqueeSpeed && marquee.dataset.marqueeSpeed != '') ? parseInt( marquee.dataset.marqueeSpeed, 10 ) : 60;
 
@@ -196,7 +200,7 @@ const initGSAPAnimation = () => {
         resizeTimer = setTimeout(measure, 200);
       });
 
-      observer.observe(marquee);
+      observer.observe(group);
     } else {
       let resizeTimer;
 

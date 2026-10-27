@@ -13,16 +13,17 @@ const setupFilter = ( filter ) => {
 };
 
 const filterList = ( ID, filterName ) => {
-  const list = document.querySelector( `[data-filter-list="${filterName}"]` );
-  if ( ID === 'all' ) {
-    Array.from( list.children ).map( item => item.classList.remove( 'is-hide' ) );
-    ScrollTrigger.refresh();
-  } else {
-    Array.from( list.children ).filter( item => {
-      item.dataset.filterItem === ID ? item.classList.remove( 'is-hide' ) : item.classList.add( 'is-hide' );
+  const lists = document.querySelectorAll( `[data-filter-list="${filterName}"]` ).forEach( (list) => {
+    if ( ID === 'all' ) {
+      Array.from( list.children ).map( item => item.classList.remove( 'is-hide' ) );
       ScrollTrigger.refresh();
-    } );
-  }
+    } else {
+      Array.from( list.children ).filter( item => {
+        item.dataset.filterItem === ID ? item.classList.remove( 'is-hide' ) : item.classList.add( 'is-hide' );
+        ScrollTrigger.refresh();
+      } );
+    }
+  });
 };
 
 export const initFilters = () => {

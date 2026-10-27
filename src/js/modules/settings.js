@@ -37,7 +37,7 @@ const initSiteSettings = () => {
   [ '[data-gallery]' ].map( ( item ) => baguetteBox.run( item ) );
   initGSAPAnimation();
   requestAnimationFrame( reloadScroll );
-  // initFilters();
+  initFilters();
 };
 
 export {
