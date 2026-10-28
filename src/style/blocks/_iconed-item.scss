@@ -1,0 +1,17 @@
+.iconed-item {
+  --link-line: transparent;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  &__icon {
+    flex-shrink: 0;
+    margin-right: 8px;
+  }
+
+  &__text {
+    font-weight: 500;
+    font-size: 18px;
+  }
+}

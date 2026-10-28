@@ -1,0 +1,29 @@
+<div class="burger-menu is-standby-default">
+  <div class="burger-menu__window">
+    <div class="burger-menu__container">
+      <button class="burger-menu__close" type="button" id="close-menu-btn">
+        <svg class="burger-menu__close-arr" width="44" height="22" aria-hidden="true">
+          <use xlink:href="assets/img/sprite.svg#arrow-left"></use>
+        </svg>
+        <svg width="113" height="24" aria-hidden="true">
+          <use xlink:href="assets/img/sprite.svg#logo"></use>
+        </svg>
+      </button>
+      <div class="burger-menu__content">
+        <nav class="burger-menu__nav burger-menu__nav--prim">
+          @include('../blocks/nav-prim.html')
+        </nav>
+        <nav class="burger-menu__nav burger-menu__nav--sec">
+          @include('../blocks/nav-sec.html')
+        </nav>
+        <ul class="burger-menu__contacts">
+          <li>@include('../blocks/iconed-contact.html', {icon: 'tg', title: 'Telegram', link: '#'})</li>
+          <li>@include('../blocks/iconed-contact.html', {icon: 'mmax', title: 'Max', link: '#'})</li>
+          <li>@include('../blocks/iconed-contact.html', {icon: 'phone', title: '+7 (993) 693 52 50', link: '#'})</li>
+          <li>@include('../blocks/iconed-contact.html', {icon: 'mail', title: 'welcome@tonybrands.ru', link: '#'})</li>
+        </ul>
+        <button class="btn btn--sec burger-menu__brief-btn" type="button">Бриф</button>
+      </div>
+    </div>
+  </div>
+</div>

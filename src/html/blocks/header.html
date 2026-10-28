@@ -10,18 +10,15 @@
     <div class="is-container">
       <div class="header-main">
         <div class="header-main__left">
-          <button class="header-main__burger" type="button" aria-label="Открыть меню"></button>
+          <button class="header-main__burger" type="button" id="burger-menu-btn" aria-label="Открыть меню"></button>
           <a class="header-main__logo" href="#">
             <img src="assets/img/logo.svg" width="113" height="24" alt="TONY">
           </a>
         </div>
         <div class="header-main__right">
-          <ul class="header-main__menu">
-            <li><a href="#">Каталог</a></li>
-            <li><a href="#">Кейсы</a></li>
-            <li><a href="#">Дизайн</a></li>
-            <li><a href="#">Контакты</a></li>
-          </ul>
+          <nav class="header-main__menu">
+            @include('nav-prim.html')
+          </nav>
           <button class="btn btn--sec header-main__btn" type="button">Связаться с нами</button>
           <button class="btn btn--sec header-main__btn" type="button">Бриф</button>
         </div>

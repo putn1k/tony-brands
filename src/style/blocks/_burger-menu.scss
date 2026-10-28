@@ -1,0 +1,108 @@
+.burger-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 50;
+
+  &.is-standby-default {
+    display: none;
+  }
+
+  &__window {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    max-width: 428px;
+    z-index: 50;
+    color: var(--gray-dark);
+    background-color: var(--white-alt);
+    overflow-y: auto;
+    padding: 64px 0;
+  }
+
+  &__container {
+    padding-right: 15px;
+    padding-left: 15px;
+
+    @include media-min ( $xl ) {
+      padding-left: 60px;
+    }
+  }
+
+  &__close {
+    @include btn-reset;
+
+    display: inline-flex;
+    align-items: center;
+    color: var(--black);
+    margin-bottom: 48px;
+
+    @include any-hover {
+      &:hover {
+        --arr-tr-x: -12px;
+      }
+    }
+  }
+
+  &__close-arr {
+    margin-right: 32px;
+    @include any-hover {
+      transition: var(--transition-default);
+      transition-property: transform;
+      transform: translateX(var(--arr-tr-x, 0));
+    }
+  }
+
+  &__nav {
+    margin-bottom: 32px;
+
+    &>ul {
+      @include list-reset;
+
+      display: grid;
+      gap: 16px;
+
+      & ul {
+        display: none;
+      }
+    }
+
+    & a {
+      --link-line: transparent;
+
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    &--prim {
+      @include media-min ( $xl ) {
+        display: none;
+      }
+    }
+  }
+
+  &__contacts {
+    @include list-reset;
+
+    display: grid;
+    gap: 8px;
+    margin-bottom: 32px;
+    color: var(--black);
+
+    @include media-min ( $md ) {
+      display: none;
+    }
+  }
+
+  &__brief-btn {
+    width: 100%;
+
+    @include media-min ( $md ) {
+      display: none;
+    }
+  }
+}

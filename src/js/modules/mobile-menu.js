@@ -1,14 +1,16 @@
 import gsap from 'gsap';
 import { lenisScroll } from "./settings.js";
-import { startScroll, stopScroll } from "./utils.js";
+import { startScroll, stopScroll, isEscKey } from "./utils.js";
 
-const menuTriggerEl = document.querySelector('#mobile-menu-btn');
-const menuEl = document.querySelector('.mobile-menu');
+const menuOpenEl = document.querySelector('#burger-menu-btn');
+const menuCloseEl = document.querySelector('#close-menu-btn');
+const menuEl = document.querySelector('.burger-menu');
+const menuWindowEl = document.querySelector('.burger-menu__window');
 
 const showByStepItems = ( itemNodes, currentDelay = 0.3, stepTime = 0.1 ) => {
   itemNodes.forEach( ( item ) => {
     gsap.fromTo( item, {
-      xPercent: 70,
+      xPercent: -70,
       opacity: 0
     }, {
       delay: currentDelay,
@@ -21,50 +23,69 @@ const showByStepItems = ( itemNodes, currentDelay = 0.3, stepTime = 0.1 ) => {
   } );
 };
 
-const openMenu = ( burger ) => {
-  burger.classList.add('is-open');
-  burger.disabled = true;
+const onBurgerClick = () => {
+  menuOpenEl.disabled = true;
+  document.documentElement.classList.add('is-show-menu');
   stopScroll( lenisScroll );
-  if (!menuEl) return;
-  menuEl.classList.remove( 'mobile-menu--standby-default' );
+
+  menuEl.classList.remove( 'is-standby-default' );
   gsap.fromTo( menuEl, {
-      xPercent: 100
+      backgroundColor: 'transparent'
+    }, {
+      backgroundColor: 'rgba(0, 0, 0, 0.6)',
+      duration: 0.4,
+    }
+  );
+  gsap.fromTo( menuWindowEl, {
+      xPercent: -100
     }, {
       xPercent: 0,
       duration: 0.4,
-      onComplete: () => burger.disabled = false
-    } );
-  showByStepItems( menuEl.querySelectorAll( '.mobile-menu__nav>ul>li' ) );
-  showByStepItems( menuEl.querySelectorAll( '.mobile-menu__action>button' ) );
-};
-
-const closeMenu = ( burger ) => {
-  burger.classList.remove('is-open');
-  if (!menuEl) return;
-  burger.disabled = true;
-    gsap.fromTo( menuEl, {
-      xPercent: 0
-    }, {
-      xPercent: -100,
-      duration: 0.25,
-      onComplete: onCloseClick
-    } );
+    }
+  );
+  showByStepItems( menuEl.querySelectorAll( '.burger-menu__nav--prim>ul>li' ) );
+  showByStepItems( menuEl.querySelectorAll( '.burger-menu__nav--sec>ul>li' ) );
 };
 
 const onCloseClick = () => {
-  menuTriggerEl.disabled = false;
-  menuEl.classList.add( 'mobile-menu--standby-default' );
-  startScroll( lenisScroll );
+  document.documentElement.classList.remove('is-show-menu');
+  gsap.fromTo( menuEl, {
+    backgroundColor: 'rgba(0, 0, 0, 0.6)'
+  }, {
+      backgroundColor: 'transparent',
+      duration: 0.25,
+    }
+  );
+  gsap.fromTo( menuWindowEl, {
+    xPercent: 0
+  }, {
+    xPercent: -100,
+    duration: 0.25,
+    onComplete: onCloseComplete
+  } );
 };
 
-const onBurgerClick = ( evt ) => {
-  evt.preventDefault();
+const onCloseComplete = () => {
+  menuEl.classList.add( 'is-standby-default' );
+  startScroll( lenisScroll );
+  menuOpenEl.disabled = false;
+};
 
-  ( evt.currentTarget.classList.contains('is-open') ) ? closeMenu( evt.currentTarget ) : openMenu( evt.currentTarget );
+const onMenuClick = ( evt ) => {
+  if ( !evt.target.classList.contains('burger-menu') ) return;
+  onCloseClick();
 };
 
 export const initMobileMenu = () => {
-  if (!menuTriggerEl) return;
+  if (!menuOpenEl || !menuCloseEl || !menuEl) return;
 
-  menuTriggerEl.addEventListener('click', onBurgerClick);
+  menuOpenEl.addEventListener('click', onBurgerClick);
+  menuCloseEl.addEventListener('click', onCloseClick);
+  menuEl.addEventListener('click', onMenuClick);
+
+  document.addEventListener( 'keydown', ( evt ) => {
+    if ( isEscKey( evt ) && document.documentElement.classList.contains( 'is-show-menu' ) ) {
+      onCloseClick();
+    }
+  } );
 };
