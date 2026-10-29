@@ -35,8 +35,11 @@
       position: fixed;
       top: 0;
       left: 0;
+      right: var(--offset-right, 0);
+      width: auto;
       z-index: 20;
       background-color: var(--black-60);
     }
   }
 }
+

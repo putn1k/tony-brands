@@ -7,22 +7,6 @@ const menuCloseEl = document.querySelector('#close-menu-btn');
 const menuEl = document.querySelector('.burger-menu');
 const menuWindowEl = document.querySelector('.burger-menu__window');
 
-const showByStepItems = ( itemNodes, currentDelay = 0.3, stepTime = 0.1 ) => {
-  itemNodes.forEach( ( item ) => {
-    gsap.fromTo( item, {
-      xPercent: -70,
-      opacity: 0
-    }, {
-      delay: currentDelay,
-      xPercent: 0,
-      opacity: 1,
-      duration: 0.8,
-      ease: 'expo.out',
-    } );
-    currentDelay = currentDelay + stepTime;
-  } );
-};
-
 const onBurgerClick = () => {
   menuOpenEl.disabled = true;
   document.documentElement.classList.add('is-show-menu');
@@ -43,8 +27,6 @@ const onBurgerClick = () => {
       duration: 0.4,
     }
   );
-  showByStepItems( menuEl.querySelectorAll( '.burger-menu__nav--prim>ul>li' ) );
-  showByStepItems( menuEl.querySelectorAll( '.burger-menu__nav--sec>ul>li' ) );
 };
 
 const onCloseClick = () => {

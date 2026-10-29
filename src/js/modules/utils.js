@@ -152,8 +152,21 @@ const sendData = ( evt, url, isSendJSON = false, isOk, isError ) => {
     } );
 };
 
+const setOffsetRight = () => {
+  const offset = window.innerWidth - document.documentElement.offsetWidth;
+  document.documentElement.style.setProperty('--offset-right', `${offset}px`);
+  document.documentElement.style.marginRight = `${offset}px`;
+};
+
+const resetOffsetRight = () => {
+  const offset = 0;
+  document.documentElement.style.setProperty('--offset-right', `${offset}`);
+  document.documentElement.style.marginRight = `${offset}`;
+};
+
 const stopScroll = ( lenis ) => {
   lenis.stop();
+  setOffsetRight();
   document.documentElement.style.overflow = 'hidden';
   document.body.style.position = 'relative';
   document.body.style.height = '100%';
@@ -161,6 +174,7 @@ const stopScroll = ( lenis ) => {
 
 const startScroll = ( lenis ) => {
   lenis.start();
+  resetOffsetRight();
   document.documentElement.style.overflow = '';
   document.body.style.position = '';
   document.body.style.height = '';
