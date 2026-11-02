@@ -6,7 +6,9 @@ import {
 } from './configs.js';
 
 import {
-  sendData,
+  formDataToJson,
+  disableSubmitBtn,
+  enableSubmitBtn,
 } from './utils.js';
 
 const justValidateConfig = validateConfig.justValidate;
@@ -20,6 +22,58 @@ const isSendError = ( target ) => {
   setTimeout( () => {
     target.classList.remove( justValidateConfig.errorFormClass );
   }, validateConfig.errorTimeout );
+};
+
+const getRule = ( rule, message, value = true ) => {
+  let config = {};
+
+  config.rule = rule;
+  config.errorMessage = message;
+
+  if ( value ) {
+    config.value = value;
+  }
+
+  return config;
+};
+
+const sendData = ( evt, url, isSendJSON = false, isOk, isError ) => {
+  const errorNode = evt.target;
+  const data = new FormData( evt.target );
+  const params = {
+    method: 'POST',
+  };
+
+  if ( isSendJSON ) {
+    Object.assign( params, {
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: formDataToJson( data ),
+    } );
+  } else {
+    Object.assign( params, {
+      body: data,
+    } );
+  }
+
+
+  disableSubmitBtn( evt.target );
+  fetch( url, params )
+    .then( ( data ) => {
+      if ( data.ok ) {
+        isOk( evt.target );
+        evt.target.reset();
+      } else {
+        isError( errorNode );
+      }
+    } )
+    .catch( () => {
+      isError( errorNode );
+    } )
+    .finally( () => {
+      enableSubmitBtn( evt.target );
+    } );
 };
 
 export const validateForms = () => {
@@ -36,61 +90,35 @@ export const validateForms = () => {
     requiredFields.forEach( ( input ) => {
       switch ( input.dataset.validate ) {
         case 'email':
-          validationRules.addField( `${formID} [data-validate="email"]`, [ {
-              rule: 'required',
-              value: true,
-              errorMessage: 'Поле обязательно для заполнения'
-            },
-            {
-              rule: 'email',
-              errorMessage: 'Некорректный адрес электронной почты',
-            },
+          validationRules.addField( `${formID} [data-validate="email"]`, [
+            getRule('required', validateConfig.messages.required ),
+            getRule('email', validateConfig.messages.email, null ),
           ] );
           break;
         case 'phone':
-          validationRules.addField( `${formID} [data-validate="phone"]`, [ {
-              rule: 'required',
-              value: true,
-              errorMessage: 'Поле обязательно для заполнения',
-            },
-            {
-              rule: 'minLength',
-              value: document.querySelector( `${formID} [data-validate="phone"]` ).dataset.mask.length,
-              errorMessage: 'Введите телефон в формате +7 (---) --- -- --',
-            },
+          const mask = document.querySelector( `${formID} [data-validate="phone"]` ).dataset.mask;
+          const lengthNumber = mask.length;
+          validationRules.addField( `${formID} [data-validate="phone"]`, [
+            getRule('required', validateConfig.messages.required ),
+            getRule('minLength', validateConfig.messages.phone( mask ), lengthNumber),
           ] );
           break;
         case 'message':
-          validationRules.addField( `${formID} [data-validate="message"]`, [ {
-              rule: 'required',
-              value: true,
-              errorMessage: 'Поле обязательно для заполнения',
-            },
-            {
-              rule: 'minLength',
-              value: 10,
-              errorMessage: 'Слишком короткое сообщение',
-            },
-            {
-              rule: 'maxLength',
-              value: 200,
-              errorMessage: 'Длина сообщения превышает 200 символов',
-            },
+          validationRules.addField( `${formID} [data-validate="message"]`, [
+            getRule('required', validateConfig.messages.required ),
+            getRule('minLength', validateConfig.messages.minLength, validateConfig.minLength ),
+            getRule('maxLength', validateConfig.messages.maxLength( validateConfig.maxLength ), validateConfig.maxLength ),
           ] );
           break;
         case 'confirm':
-          validationRules.addField( `${formID} [data-validate="confirm"]`, [ {
-            rule: 'required',
-            value: true,
-            errorMessage: 'Подтвердите согласие на обработку персональных данных',
-          }, ] );
+          validationRules.addField( `${formID} [data-validate="confirm"]`, [
+            getRule('required', validateConfig.messages.confirm ),
+          ] );
           break;
         default:
-          validationRules.addField( `${formID} [data-validate="${input.dataset.validate}"]`, [ {
-            rule: 'required',
-            value: true,
-            errorMessage: 'Поле обязательно для заполнения'
-          }, ] );
+          validationRules.addField( `${formID} [data-validate="${input.dataset.validate}"]`, [
+            getRule('required', validateConfig.messages.required ),
+          ] );
           break;
       }
     } );

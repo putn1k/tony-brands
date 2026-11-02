@@ -67,6 +67,16 @@ const validateConfig = {
   errorTimeout: 1500,
   mask: {
     bodyMask: ' (___) ___ __ __',
+  },
+  minLength: 10,
+  maxLength: 200,
+  messages: {
+    required: 'Поле обязательно для заполнения',
+    email: 'Некорректный адрес электронной почты',
+    phone: ( mask ) => `Введите телефон в формате ${mask}`,
+    minLength: 'Слишком короткое сообщение',
+    maxLength: ( maxLenght )=>`Длина сообщения превышает ${maxLenght} символов`,
+    confirm: 'Подтвердите согласие на обработку персональных данных',
   }
 };
 

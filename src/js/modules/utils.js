@@ -1,14 +1,3 @@
-import HystModal from 'hystmodal';
-import Swiper from 'swiper';
-import {
-  Navigation,
-  Autoplay,
-} from 'swiper/modules';
-import {
-  sliderConfig,
-  modalConfig
-} from './configs.js';
-
 const debounce = ( cb, delay ) => {
   let timer;
   return function( ...args ) {
@@ -49,45 +38,6 @@ const iosVhFix = () => {
 
 const isEscKey = ( evt ) => evt.key === 'Escape';
 
-const initModal = ( name, handler = 'data-hystmodal', options = {} ) => {
-  if ( !name ) return;
-
-  const config = Object.assign( {}, modalConfig, {
-    config: {
-      linkAttributeName: handler
-    }
-  }, options );
-
-  const modal = new HystModal( config );
-
-  modal.config.linkAttributeName = handler;
-
-  if ( window.hystmodal !== undefined ) {
-    window.hystmodal[ name ] = modal;
-  } else {
-    window.hystmodal = {};
-    window.hystmodal[ name ] = modal;
-  }
-
-  return modal;
-};
-
-const initSlider = ( name, options = {} ) => {
-  const defaultConfig = Object.assign( {}, {
-    modules: [ Navigation, Autoplay, ],
-  }, sliderConfig.default );
-  const customConfig = Object.assign( defaultConfig, options );
-
-  if ( typeof name === 'string' ) {
-    const sliderElement = document.querySelector( name );
-
-    if ( !sliderElement ) return;
-    return new Swiper( sliderElement, customConfig );
-  }
-
-  return new Swiper( name, customConfig );
-};
-
 const disableSubmitBtn = ( form ) => {
   if ( !form.querySelector( '[type="submit"]' ) ) return;
   form.querySelector( '[type="submit"]' ).setAttribute( 'disabled', 'disabled' );
@@ -111,45 +61,6 @@ const formDataToJson = ( formData ) => {
     }
   } );
   return JSON.stringify( object );
-};
-
-const sendData = ( evt, url, isSendJSON = false, isOk, isError ) => {
-  const errorNode = evt.target;
-  const data = new FormData( evt.target );
-  const params = {
-    method: 'POST',
-  };
-
-  if ( isSendJSON ) {
-    Object.assign( params, {
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: formDataToJson( data ),
-    } );
-  } else {
-    Object.assign( params, {
-      body: data,
-    } );
-  }
-
-
-  disableSubmitBtn( evt.target );
-  fetch( url, params )
-    .then( ( data ) => {
-      if ( data.ok ) {
-        isOk( evt.target );
-        evt.target.reset();
-      } else {
-        isError( errorNode );
-      }
-    } )
-    .catch( () => {
-      isError( errorNode );
-    } )
-    .finally( () => {
-      enableSubmitBtn( evt.target );
-    } );
 };
 
 const setOffsetRight = () => {
@@ -180,24 +91,13 @@ const startScroll = ( lenis ) => {
   document.body.style.height = '';
 };
 
-const initItemObserver = ( targetNode, observeNode, isTrueFn, isFalseFn, config ) => {
-  if ( !targetNode || !observeNode ) return;
-  const callback = ( entries ) => {
-    entries.forEach( ( entry ) => {
-      ( !entry.isIntersecting ) ? isTrueFn( targetNode, observeNode ) : isFalseFn( targetNode, observeNode );
-    } );
-  };
-  new IntersectionObserver( callback, config ).observe( observeNode );
-};
-
 export {
   debounce,
   iosVhFix,
   isEscKey,
-  initSlider,
-  initModal,
-  sendData,
   stopScroll,
   startScroll,
-  initItemObserver
+  formDataToJson,
+  disableSubmitBtn,
+  enableSubmitBtn,
 };
