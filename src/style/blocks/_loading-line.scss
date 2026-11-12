@@ -1,18 +1,26 @@
 .loading-line {
   &__el {
     display: block;
-    height: 3px;
+    height: 2px;
 
     &--static {
       width: 100%;
       background-color: var(--red-light);
-      margin-bottom: 15px;
+      margin-bottom: 7px;
     }
 
     &--progress {
       width: var(--loading-progress, 0);
       background-color: var(--red);
       will-change: width;
+    }
+
+    @include media-min ( $xl ) {
+      height: 3px;
+
+      &--static {
+        margin-bottom: 9px;
+      }
     }
   }
 }

@@ -10,7 +10,7 @@
   height: 600px;
 
 
-  @include media-min ( $xl ) {
+  @include media-min ( $lg ) {
     padding: 128px 0;
   }
 

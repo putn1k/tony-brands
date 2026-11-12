@@ -6,17 +6,17 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  font-size: clamp(1.4rem, 1.54rem + 0.16vw, 1.8rem);
-  font-weight: 500;
   padding: 12px 32px;
+  border-radius: 4px;
+  font-weight: inherit;
 
   @include any-hover {
-    transition: var(--transition-default);
+    transition: var(--duration-default);
     transition-property: color, background-color;
   };
 
   @include media-min ( $lg ) {
-    padding: 16px 64px;
+    padding: 8px 32px;
   }
 
   &--prim {
@@ -76,7 +76,7 @@
 
     @include any-hover {
       &::after {
-        transition: var(--transition-default);
+        transition: var(--duration-default);
         transition-property: transform;
       }
 

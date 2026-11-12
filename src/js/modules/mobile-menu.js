@@ -30,7 +30,6 @@ const onBurgerClick = () => {
 };
 
 const onCloseClick = () => {
-  document.documentElement.classList.remove('is-show-menu');
   gsap.fromTo( menuEl, {
     backgroundColor: 'rgba(0, 0, 0, 0.6)'
   }, {
@@ -48,6 +47,7 @@ const onCloseClick = () => {
 };
 
 const onCloseComplete = () => {
+  document.documentElement.classList.remove('is-show-menu');
   menuEl.classList.add( 'is-standby-default' );
   startScroll( lenisScroll );
   menuOpenEl.disabled = false;

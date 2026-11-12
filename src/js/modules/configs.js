@@ -85,10 +85,6 @@ const observerConfig = {
     rootMargin: '600px',
     threshold: 1,
   },
-  headerBanner: {
-    rootMargin: '0px',
-    threshold: 0,
-  },
 };
 
 export {

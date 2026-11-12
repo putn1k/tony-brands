@@ -1,7 +1,7 @@
 .about-dev {
   padding: 48px 0 96px;
 
-  @include media-min ( $xl ) {
+  @include media-min ( $lg ) {
     padding: 64px 0 128px;
   }
 

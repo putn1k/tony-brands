@@ -1,14 +1,24 @@
 .site-header {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  right: var(--offset-right, 0);
+  width: var(--full-width, 100%);
   z-index: 20;
+  font-size: 1.8rem;
+  transform: translateY(var(--header-translate, 0));
+  transition: var(--duration-default);
+  transition-property: transform;
 
   &__banner {
-    color: var(--white);
-    background-color: var(--black);
-    padding: 8px 0;
+    display: none;
+
+    @include media-min ( $lg ) {
+      display: block;
+      padding: 6px 0;
+      color: var(--white);
+      background-color: var(--black);
+    }
 
     @include media-min ( $xl ) {
       padding: 12px 0;
@@ -23,22 +33,10 @@
 
   &__main {
     width: 100%;
-    padding: 20px 0;
-    transition: var(--transition-default);
-    transition-property: background-color;
+    padding: 14px 0;
 
-    @include media-min ( $md ) {
+    @include media-min ( $lg ) {
       padding: 16px 0;
-    }
-
-    &.is-fixed {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: var(--offset-right, 0);
-      width: auto;
-      z-index: 20;
-      background-color: var(--black-60);
     }
   }
 }

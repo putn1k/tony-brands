@@ -10,9 +10,16 @@ html {
 }
 
 body {
+  color: var(--black);
+  background-color: var(--white);
   min-width: var(--min-site-width);
   scroll-behavior: smooth;
   -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: inherit;
+  text-decoration-color: var(--link-line, currentColor);
 }
 
 img {

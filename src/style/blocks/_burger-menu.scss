@@ -28,7 +28,7 @@
     padding-right: 15px;
     padding-left: 15px;
 
-    @include media-min ( $xl ) {
+    @include media-min ( $lg ) {
       padding-left: 60px;
     }
   }
@@ -51,7 +51,7 @@
   &__close-arr {
     margin-right: 32px;
     @include any-hover {
-      transition: var(--transition-default);
+      transition: var(--duration-default);
       transition-property: transform;
       transform: translateX(var(--arr-tr-x, 0));
     }
@@ -79,7 +79,7 @@
     }
 
     &--prim {
-      @include media-min ( $xl ) {
+      @include media-min ( $lg ) {
         display: none;
       }
     }
@@ -93,7 +93,7 @@
     margin-bottom: 32px;
     color: var(--black);
 
-    @include media-min ( $md ) {
+    @include media-min ( $lg ) {
       display: none;
     }
   }
@@ -101,7 +101,7 @@
   &__brief-btn {
     width: 100%;
 
-    @include media-min ( $md ) {
+    @include media-min ( $lg ) {
       display: none;
     }
   }

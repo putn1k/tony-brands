@@ -18,6 +18,7 @@ import {
   initGSAPAnimation
 } from './gsap.js';
 import { initFilters } from './filter-list.js';
+import { initScrollDirectionObserver } from './scroll-direction.js';
 
 
 const lenisScroll = new Lenis( smoothScrollConfig.lenis );
@@ -31,6 +32,7 @@ const initSiteSettings = () => {
 
   iosVhFix();
   initScrollObserver();
+  initScrollDirectionObserver();
   initModals();
   new SmoothScroll( 'a[href*="#"]', smoothScrollConfig );
   new AcceptCookiePopup();

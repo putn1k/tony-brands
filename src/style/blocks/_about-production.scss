@@ -8,7 +8,7 @@
   padding: 96px 0;
 
 
-  @include media-min ( $xl ) {
+  @include media-min ( $lg ) {
     padding: 128px 0;
   }
 
@@ -38,7 +38,7 @@
     padding: 64px 0;
     padding-left: 15px;
 
-    @include media-min ( $xl ) {
+    @include media-min ( $lg ) {
       padding-left: 60px;
     }
   }

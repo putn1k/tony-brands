@@ -1,11 +1,15 @@
+@function setInPx($width) {
+  @return "#{$width}px";
+}
+
 @mixin media-min($screenWidth) {
-  @media (min-width: $screenWidth) {
+  @media (min-width: setInPx($screenWidth)) {
     @content;
   }
 }
 
 @mixin media-max($screenWidth) {
-  @media (max-width: $screenWidth) {
+  @media (max-width: setInPx($screenWidth)) {
     @content;
   }
 }
