@@ -35,11 +35,6 @@
 
   &__subtitle {
     margin: 0;
-    max-width: 690px;
-
-    @include media-min ( $lg ) {
-      max-width: 1080px;
-    }
   }
 
   &__text {
