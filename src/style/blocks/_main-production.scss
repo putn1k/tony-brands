@@ -1,0 +1,108 @@
+.main-production {
+  color: var(--white);
+  background-color: var(--black);
+  background-image: url('../img/static/gradient.webp');
+  background-repeat: no-repeat;
+  background-position: top left;
+  background-size: cover;
+  padding: 48px 0;
+
+
+  @include media-min ( $lg ) {
+    padding: 96px 0;
+  }
+
+  @include media-min ( $xl ) {
+    padding: 128px 0;
+  }
+
+  &__alt-color {
+    color: var(--gray);
+  }
+
+  &__title {
+    margin: 0;
+    margin-bottom: 24px;
+
+    @include media-min ( $lg ) {
+      margin-bottom: 32px;
+    }
+
+    @include media-min ( $xl ) {
+      margin-bottom: 48px;
+    }
+  }
+
+  &__subtitle {
+    margin: 0;
+    max-width: 690px;
+
+    @include media-min ( $lg ) {
+      max-width: 1080px;
+    }
+  }
+
+  &__text {
+    display: none;
+
+    @include media-min ( $md ) {
+      display: block;
+      margin: 0;
+      margin-top: 8px;
+      max-width: 550px;
+    }
+
+    @include media-min ( $lg ) {
+      max-width: 840px;
+    }
+  }
+
+  &__cards {
+    overflow: hidden;
+    width: 100%;
+    padding: 64px 0;
+    padding-left: 15px;
+
+    @include media-min ( $lg ) {
+      padding-left: 60px;
+    }
+  }
+
+  &__cards-track {
+    display: flex;
+    width: max-content;
+  }
+
+  &__card {
+    margin-right: 20px;
+  }
+
+  &__btn {
+    --link-line: transparent;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--gray);
+
+    @include any-hover {
+      &:hover {
+        --arrow-x: 8px;
+      }
+    }
+
+    & span {
+      white-space: nowrap;
+    }
+
+    & svg {
+      max-height: 1.4em;
+      aspect-ratio: 53 / 16;
+      flex-shrink: 0;
+      margin-left: 1.4em;
+      transition: var(--duration-default);
+      transition-property: transform;
+      transform: translateX(var(--arrow-x, 0));
+    }
+  }
+}

@@ -45,12 +45,8 @@
   &__item-title {
     margin: 0;
     margin-bottom: 8px;
-
-    &::before {
-      content: '// ';
-      color: var(--red);
-    }
   }
+
   &__item-text {
     margin: 0;
     color: var(--gray-dark);

@@ -1,0 +1,103 @@
+.main-creators {
+  padding: 48px 0 ;
+
+  @include media-min ( $lg ) {
+    padding: 64px 0;
+  }
+
+  &__title {
+    margin: 0;
+    margin-bottom: 24px;
+
+    @include media-min ( $lg ) {
+      margin-bottom: 32px;
+    }
+
+    @include media-min ( $xl ) {
+      margin-bottom: 48px;
+    }
+  }
+
+  &__accent-text {
+    color: var(--gray-light);
+
+    @include media-min ( $lg ) {
+      display: block;
+    }
+    @include media-min ( 1440 ) {
+      display: inline;
+    }
+  }
+
+  &__subtitle {
+    margin: 0;
+    max-width: 640px;
+
+    @include media-min ( $lg ) {
+      max-width: 1080px;
+    }
+  }
+
+  &__text {
+    display: none;
+
+    @include media-min ( $md ) {
+      display: block;
+      color: var(--gray-dark);
+      margin: 0;
+      margin-top: 8px;
+      max-width: 550px;
+    }
+
+    @include media-min ( $lg ) {
+      max-width: 840px;
+    }
+  }
+
+  &__cards {
+    padding-top: 24px;
+
+    @include media-min ( $md ) {
+      display: flex;
+      overflow-x: auto;
+      margin: 0 -15px;
+    }
+
+    @include media-min ( $lg ) {
+      overflow: visible;
+      margin: 0;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+  }
+
+  &__card {
+    margin-bottom: 14px;
+
+    @include media-min ( $md ) {
+      margin: 0 4px;
+      margin-bottom: 0;
+      width: 547px;
+      flex-shrink: 0;
+
+      &:first-of-type {
+        margin-left: 15px;
+      }
+      &:last-of-type {
+        margin-right: 15px;
+      }
+    }
+
+    @include media-min ( $lg ) {
+      width: auto;
+      margin: 0;
+      &:first-of-type {
+        margin-left: revert;
+      }
+      &:last-of-type {
+        margin-right: revert;
+      }
+    }
+  }
+}

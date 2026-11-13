@@ -11,7 +11,7 @@ const initGSAPAnimation = () => {
   // scroll animation
   document.querySelectorAll( '[data-anim]' ).forEach( ( element ) => {
     const delay = element.dataset.animDelay ? ( parseInt( element.dataset.animDelay, 10 ) / 1000 ) : '0.2';
-    const duration = element.dataset.animDuration ? ( parseInt( element.dataset.animDuration, 10 ) / 1000 ) : '0.6';
+    const duration = element.dataset.animDuration ? ( parseInt( element.dataset.animDuration, 10 ) / 1000 ) : '1.2';
     const trigger = element.dataset.animTrigger ? element.closest( element.dataset.animTrigger ) : element;
 
     const animConfig = {
@@ -243,10 +243,10 @@ const initGSAPAnimation = () => {
 
   // custom horizontal scroll
   (function () {
-    const block = document.querySelector('.about-production');
+    const block = document.querySelector('.main-production');
     if ( !block ) return;
-    const cards = block.querySelector('.about-production__cards');
-    const track = block.querySelector('.about-production__cards-track');
+    const cards = block.querySelector('.main-production__cards');
+    const track = block.querySelector('.main-production__cards-track');
     let trackOffsetRight = 15;
 
     if ( !cards || !track) return;

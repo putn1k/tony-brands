@@ -1,18 +1,18 @@
 .models-card {
   border: 1px solid var(--gray);
   box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.1);
-
-  @include media-min ( $lg ) {
-    display: flex;
-    flex-direction: column;
-  }
+  border-radius: 8px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  display: flex;
+  flex-direction: column;
 
   &__imgs {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 8px;
-    margin-bottom: 8px;
-    margin-top: 24px;
+    grid-template-columns: 86fr 160fr 86fr;
+    align-items: center;
+    gap: 2px;
+    margin-top: 8px;
   }
 
   &__img {
@@ -30,35 +30,62 @@
   }
 
   &__text-wrapper {
-    padding: 16px;
+    padding: 14px;
 
-    @include media-min ( $lg ) {
-      padding: 32px 48px;
+    @include media-min ( $xl ) {
+      padding: 18px;
     }
   }
 
   &__title {
     margin: 0;
     margin-bottom: 8px;
-    font-size: clamp(2rem, 1.2rem + 1.2vw, 3.4rem);
-
-    &::before {
-      content: '// ';
-      color: var(--red);
-    }
   }
 
   &__text {
     color: var(--gray-dark);
     margin: 0;
+    max-width: 415px;
+
     @include media-min ( $lg ) {
-      max-width: 80%;
+      max-width: 450px;
+    }
+
+    @include media-min ( $xl ) {
+      max-width: 700px;
     }
   }
 
   &__btn {
+    --link-line: transparent;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 14px;
+    color: var(--gray-light);
+    background-color: var(--gray-dark);
+    margin-top: auto;
+    @include any-hover {
+      &:hover {
+        --arrow-x: 8px;
+      }
+    }
+
+    & svg {
+      max-height: 1em;
+      aspect-ratio: 53 / 16;
+      transition: var(--duration-default);
+      transition-property: transform;
+      transform: translateX(var(--arrow-x, 0));
+    }
+
     @include media-min ( $lg ) {
-      margin-top: auto;
+      padding: 10px 16px;
+    }
+
+    @include media-min ( $xl ) {
+      padding: 12px 32px;
     }
   }
 }
