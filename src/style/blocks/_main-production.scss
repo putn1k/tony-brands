@@ -1,4 +1,5 @@
 .main-production {
+  overflow-x: hidden;
   color: var(--white);
   background-color: var(--black);
   background-image: url('../img/static/gradient.webp');
@@ -53,14 +54,8 @@
   }
 
   &__cards {
-    overflow: hidden;
     width: 100%;
     padding: 64px 0;
-    padding-left: 15px;
-
-    @include media-min ( $lg ) {
-      padding-left: 60px;
-    }
   }
 
   &__cards-track {
@@ -69,7 +64,9 @@
   }
 
   &__card {
-    margin-right: 20px;
+    &:not(:last-child) {
+      margin-right: 20px;
+    }
   }
 
   &__btn {

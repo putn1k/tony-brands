@@ -247,13 +247,8 @@ const initGSAPAnimation = () => {
     if ( !block ) return;
     const cards = block.querySelector('.main-production__cards');
     const track = block.querySelector('.main-production__cards-track');
-    let trackOffsetRight = 15;
 
     if ( !cards || !track) return;
-
-    gsapMatchMedia.add( '(min-width: 1300px)', () => {
-      trackOffsetRight = 64;
-    } );
 
     const getScrollDistance = () => {
       const overflow = track.scrollWidth - cards.clientWidth;
@@ -261,15 +256,15 @@ const initGSAPAnimation = () => {
     };
 
     gsap.to(track, {
-      x: () => -getScrollDistance() - trackOffsetRight,
+      x: () => -getScrollDistance(),
       ease: 'none',
       scrollTrigger: {
-        trigger: block,
+        trigger: document.querySelector('.h-scroll'),
         pin: true,
         scrub: 1,
         anticipatePin: 1,
         invalidateOnRefresh: true,
-        start: 'center center',
+        start: 'center top',
         end: () => '+=' + getScrollDistance(),
         pinSpacing: true,
       },

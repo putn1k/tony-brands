@@ -86,9 +86,9 @@ input[type="file"].visually-hidden {
   }
 
   @include media-min(1440) {
-    --container-gap: 64px;
+    // --container-gap: 64px;
 
-    max-width: none;
+    max-width: 1336px;
   }
 
   @include media-min($xl) {

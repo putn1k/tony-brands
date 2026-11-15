@@ -1,7 +1,7 @@
 .header-main {
   display: flex;
   align-items: center;
-  color: var(--gray);
+  color: var(--white);
 
   @include media-min ( $lg ) {
     justify-content: space-between;

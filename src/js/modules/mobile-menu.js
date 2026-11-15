@@ -14,7 +14,7 @@ const onBurgerClick = () => {
 
   menuEl.classList.remove( 'is-standby-default' );
   gsap.fromTo( menuEl, {
-      backgroundColor: 'transparent'
+      backgroundColor: 'rgba(0, 0, 0, 0)',
     }, {
       backgroundColor: 'rgba(0, 0, 0, 0.6)',
       duration: 0.4,
@@ -33,7 +33,7 @@ const onCloseClick = () => {
   gsap.fromTo( menuEl, {
     backgroundColor: 'rgba(0, 0, 0, 0.6)'
   }, {
-      backgroundColor: 'transparent',
+      backgroundColor: 'rgba(0, 0, 0, 0)',
       duration: 0.25,
     }
   );
