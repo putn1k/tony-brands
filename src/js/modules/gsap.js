@@ -259,14 +259,15 @@ const initGSAPAnimation = () => {
       x: () => -getScrollDistance(),
       ease: 'none',
       scrollTrigger: {
-        trigger: document.querySelector('.h-scroll'),
+        trigger: block,
         pin: true,
         scrub: 1,
         anticipatePin: 1,
         invalidateOnRefresh: true,
-        start: 'center top',
+        start: 'center center',
         end: () => '+=' + getScrollDistance(),
         pinSpacing: true,
+        markers: true,
       },
     });
   })();
