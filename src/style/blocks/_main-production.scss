@@ -88,8 +88,8 @@
     }
 
     & svg {
-      max-height: 1.4em;
-      aspect-ratio: 53 / 16;
+      width: calc(1.4em * (53 / 16));
+      height: 1.4em;
       flex-shrink: 0;
       margin-left: 1.4em;
       transition: var(--duration-default);
