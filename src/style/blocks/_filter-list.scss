@@ -1,0 +1,23 @@
+.filter-list {
+  @include list-reset;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  &__btn {
+    @include btn-reset;
+
+    color: var(--gray-light);
+    margin-right: 24px;
+    font-weight: 500;
+
+    &.is-apply {
+      color: var(--red);
+      text-decoration: underline;
+    }
+
+    @include media-min ( $xl ) {
+      margin-right: 32px;
+    }
+  }
+}
