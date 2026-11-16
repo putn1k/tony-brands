@@ -1,4 +1,3 @@
-import ScrollTrigger from 'gsap/ScrollTrigger.js';
 import { gsapMatchMedia } from './gsap.js';
 
 const setupFilter = ( filter ) => {
@@ -17,11 +16,9 @@ const filterList = ( ID, filterName ) => {
   const lists = document.querySelectorAll( `[data-filter-list="${filterName}"]` ).forEach( (list) => {
     if ( ID === 'all' ) {
       Array.from( list.children ).map( item => item.classList.remove( 'is-hide' ) );
-      ScrollTrigger.refresh();
     } else {
       Array.from( list.children ).filter( item => {
         item.dataset.filterItem === ID ? item.classList.remove( 'is-hide' ) : item.classList.add( 'is-hide' );
-        ScrollTrigger.refresh();
       } );
     }
   });
