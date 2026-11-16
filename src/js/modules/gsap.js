@@ -119,53 +119,74 @@ const initGSAPAnimation = () => {
   });
 
   // marquee animation
-  document.querySelectorAll('.gsap-marquee').forEach((marquee) => {
+  const createMarquee = (marquee) => {
     const track = marquee.querySelector('.gsap-marquee__track');
     const group = marquee.querySelector('.gsap-marquee__group');
 
-    const createClone = ( el, container ) => {
-      const clone = group.cloneNode(true);
+    if (!track || !group) {
+      console.warn('Marquee: track or group not found', marquee);
+      return { init: () => {}, destroy: () => {} };
+    }
+
+    let initialized = false;
+    let clone = null;
+    let cleanupFns = [];
+    let tickerFn = null;
+    let returnTween = null;
+    let resizeTimer = null;
+    let observer = null;
+
+    const addCleanup = (fn) => cleanupFns.push(fn);
+
+    const createClone = () => {
+      if (clone) return;
+      clone = group.cloneNode(true);
       clone.setAttribute('aria-hidden', 'true');
       track.appendChild(clone);
     };
 
-    createClone( group, track );
+    const removeClone = () => {
+      if (clone && clone.parentNode) clone.parentNode.removeChild(clone);
+      clone = null;
+    };
 
-    const baseSpeed = (marquee.dataset.marqueeSpeed && marquee.dataset.marqueeSpeed != '') ? parseInt( marquee.dataset.marqueeSpeed, 10 ) : 60;
+    const baseSpeed =
+      marquee.dataset.marqueeSpeed && marquee.dataset.marqueeSpeed !== ''
+        ? parseInt(marquee.dataset.marqueeSpeed, 10)
+        : 60;
 
-    if (marquee.classList.contains('is-boosted-marquee')) {
-      const maxBoost = (marquee.dataset.marqueeBoost && marquee.dataset.marqueeBoost != '') ? parseFloat(marquee.dataset.marqueeBoost) * 100 : 100;
+    const initBoosted = () => {
+      const maxBoost =
+        marquee.dataset.marqueeBoost && marquee.dataset.marqueeBoost !== ''
+          ? parseFloat(marquee.dataset.marqueeBoost) * 100
+          : 100;
       const returnDelay = 0.1;
 
       let groupWidth = 0;
       let x = 0;
       let direction = -1;
       let currentSpeed = baseSpeed;
-      let returnTween;
-      let resizeTimer;
       let lastScrollY = window.scrollY;
       let lastScrollTime = performance.now();
 
-      function measure() {
+      const measure = () => {
         groupWidth = group.offsetWidth;
-
         if (groupWidth) {
           x = gsap.utils.wrap(-groupWidth, 0, x);
-          gsap.set(track, { x: x });
+          gsap.set(track, { x });
         }
-      }
+      };
 
       measure();
 
-      gsap.ticker.add((time, deltaTime) => {
+      tickerFn = (time, deltaTime) => {
         if (!groupWidth) return;
-
         x += direction * currentSpeed * (deltaTime / 1000);
-
         x = gsap.utils.wrap(-groupWidth, 0, x);
-
-        gsap.set(track, { x: x });
-      });
+        gsap.set(track, { x });
+      };
+      gsap.ticker.add(tickerFn);
+      addCleanup(() => gsap.ticker.remove(tickerFn));
 
       const scrollBoost = () => {
         const now = performance.now();
@@ -176,11 +197,7 @@ const initGSAPAnimation = () => {
         if (deltaTime > 0 && Math.abs(deltaY) > 0) {
           const velocity = (deltaY / deltaTime) * 10 * maxBoost;
           direction = velocity > 0 ? -1 : 1;
-          const boost = gsap.utils.clamp(
-            1,
-            maxBoost,
-            1 + Math.abs(velocity) / 100
-          );
+          const boost = gsap.utils.clamp(1, maxBoost, 1 + Math.abs(velocity) / 100);
           currentSpeed = baseSpeed * boost;
           if (returnTween) returnTween.kill();
           returnTween = gsap.delayedCall(returnDelay, () => {
@@ -192,26 +209,41 @@ const initGSAPAnimation = () => {
         lastScrollTime = now;
       };
 
-      window.addEventListener('load', measure);
       window.addEventListener('scroll', scrollBoost, { passive: true });
+      addCleanup(() => window.removeEventListener('scroll', scrollBoost));
 
-      const observer = new ResizeObserver(() => {
+      const onLoad = () => measure();
+      window.addEventListener('load', onLoad);
+      addCleanup(() => window.removeEventListener('load', onLoad));
+
+      observer = new ResizeObserver(() => {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(measure, 200);
       });
-
       observer.observe(group);
-    } else {
-      let resizeTimer;
+      addCleanup(() => observer.disconnect());
 
-      const init = () => {
+      addCleanup(() => {
+        if (returnTween) {
+          returnTween.kill();
+          returnTween = null;
+        }
+      });
+    };
+
+    const initDefault = () => {
+      let killed = false;
+
+      const run = () => {
+        if (killed) return;
         const groupWidth = group.offsetWidth;
+        if (!groupWidth) return;
         gsap.to(track, {
           xPercent: -50,
           duration: groupWidth / baseSpeed,
           ease: 'none',
           repeat: -1,
-          overwrite: true
+          overwrite: true,
         });
       };
 
@@ -225,21 +257,102 @@ const initGSAPAnimation = () => {
             })
       );
 
-      Promise.all(loaded).then(init);
+      Promise.all(loaded).then(run);
 
-      const observer = new ResizeObserver(() => {
+      observer = new ResizeObserver(() => {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
+          if (killed) return;
           gsap.killTweensOf(track);
           gsap.set(track, { xPercent: 0 });
-          init();
+          run();
         }, 200);
       });
-
       observer.observe(marquee);
+
+      addCleanup(() => {
+        killed = true;
+        if (observer) observer.disconnect();
+        clearTimeout(resizeTimer);
+        gsap.killTweensOf(track);
+        gsap.set(track, { xPercent: 0 });
+      });
+    };
+
+    const destroy = () => {
+      if (!initialized) return;
+
+      cleanupFns.forEach((fn) => fn());
+      cleanupFns = [];
+
+      gsap.killTweensOf(track);
+      gsap.set(track, { x: 0, xPercent: 0 });
+
+      removeClone();
+
+      clearTimeout(resizeTimer);
+      resizeTimer = null;
+      tickerFn = null;
+      observer = null;
+
+      initialized = false;
+    };
+
+    const init = () => {
+      if (initialized) return;
+      createClone();
+
+      if (marquee.classList.contains('is-boosted-marquee')) {
+        initBoosted();
+      } else {
+        initDefault();
+      }
+      initialized = true;
+    };
+
+    return { init, destroy };
+  };
+
+  const marqueeRegistry = new WeakMap();
+
+  const getMarqueeInstance = (el) => {
+    if (!marqueeRegistry.has(el)) {
+      marqueeRegistry.set(el, createMarquee(el));
+    }
+    return marqueeRegistry.get(el);
+  };
+
+  document.querySelectorAll('.gsap-marquee').forEach((marquee) => {
+    const instance = getMarqueeInstance(marquee);
+
+    const startAttr = marquee.dataset.marqueeStart;
+    const stopAttr = marquee.dataset.marqueeStop;
+
+    if (stopAttr) {
+      const stopPx = parseInt(stopAttr, 10);
+      if (!Number.isFinite(stopPx)) return;
+
+      gsapMatchMedia.add(`(max-width: ${stopPx - 1}px)`, () => {
+        instance.init();
+        return () => instance.destroy();
+      });
+      return;
     }
 
+    if (startAttr) {
+      const startPx = parseInt(startAttr, 10);
+      if (!Number.isFinite(startPx)) return;
+
+      gsapMatchMedia.add(`(max-width: ${startPx}px)`, () => {
+        instance.init();
+        return () => instance.destroy();
+      });
+      return;
+    }
+
+    instance.init();
   });
+
 
   // custom horizontal scroll
   (function () {
@@ -273,6 +386,7 @@ const initGSAPAnimation = () => {
 };
 
 export {
+  gsapMatchMedia,
   initGSAPAnimation,
   ScrollTrigger,
 };
