@@ -1,4 +1,5 @@
 import ScrollTrigger from 'gsap/ScrollTrigger.js';
+import { gsapMatchMedia } from './gsap.js';
 
 const setupFilter = ( filter ) => {
   filter.addEventListener( 'click', ( evt ) => {
@@ -26,6 +27,23 @@ const filterList = ( ID, filterName ) => {
   });
 };
 
+const resetFilters = ( filtersName, defaultID = 'all' ) => {
+  const list = document.querySelector(`[data-filters="${filtersName}"]`);
+
+  if ( !list ) return;
+
+  list.querySelectorAll('[data-filter-item]').forEach(item => item.classList.remove('is-apply'));
+  const defaultTrigger = list.querySelector(`[data-filter-item="${defaultID}"]`);
+
+  if( !defaultTrigger ) return;
+
+  defaultTrigger.classList.add('is-apply');
+  filterList( defaultID, filtersName );
+};
+
 export const initFilters = () => {
   document.querySelectorAll( '[data-filters]' ).forEach( setupFilter );
+  gsapMatchMedia.add( '(max-width: 1299px)', () => {
+    resetFilters('projects');
+  } );
 };
