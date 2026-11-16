@@ -267,7 +267,6 @@ const initGSAPAnimation = () => {
         start: 'center center',
         end: () => '+=' + getScrollDistance(),
         pinSpacing: true,
-        markers: true,
       },
     });
   })();
