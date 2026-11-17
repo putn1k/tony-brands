@@ -90,8 +90,10 @@
     }
 
     @include media-min ( $lg ) {
+      overflow: hidden;
       width: auto;
       margin: 0;
+
       &:first-of-type {
         margin-left: revert;
       }

@@ -3,5 +3,6 @@ import 'baguettebox.js/dist/baguetteBox.min.css';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
+import 'swiper/css/effect-coverflow';
 import 'hystmodal/css';
 import '../../style/main.scss';

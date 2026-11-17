@@ -9,6 +9,25 @@ const sliderConfig = {
       nextEl: '[data-to-slide="next"]',
     }
   },
+  carousel: {
+    allowTouchMove: false,
+    autoplay: {
+      delay: 5000,
+    },
+    loop: true,
+    slidesPerView: 1.8,
+    spaceBetween: 0,
+    effect: "coverflow",
+    centeredSlides: true,
+    speed: 750,
+    coverflowEffect: {
+      rotate: 0,
+      stretch: 20,
+      depth: 500,
+      slideShadows: true,
+      modifier: 1,
+    },
+  },
   banner: {
     spaceBetween: 0,
     rewind: true,

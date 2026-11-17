@@ -2,15 +2,15 @@ import Swiper from 'swiper';
 import {
   Navigation,
   Autoplay,
+  EffectCoverflow,
 } from 'swiper/modules';
 
-import {
-  sliderConfig
-} from './configs.js';
+import { sliderConfig } from './configs.js';
+import { getRandomNumber } from "./utils.js";
 
 const initSlider = ( name, options = {} ) => {
   const defaultConfig = Object.assign( {}, {
-    modules: [ Navigation, Autoplay, ],
+    modules: [ Navigation, Autoplay, EffectCoverflow ],
   }, sliderConfig.default );
   const customConfig = Object.assign( defaultConfig, options );
 
@@ -25,10 +25,8 @@ const initSlider = ( name, options = {} ) => {
 };
 
 const initSliders = () => {
-  document.querySelectorAll( '.slider' ).forEach( slider => {
-    const slides = slider.querySelectorAll( '.swiper-slide' );
-    const config = ( slides.length < 4 ) ? sliderConfig.gallery : sliderConfig.galleryCentered;
-    initSlider( slider, config );
+  document.querySelectorAll( '[ data-slider="carousel" ]' ).forEach( slider => {
+    initSlider( slider, sliderConfig.carousel );
   } );
 };
 

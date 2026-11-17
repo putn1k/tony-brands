@@ -91,6 +91,11 @@ const startScroll = ( lenis ) => {
   document.body.style.height = '';
 };
 
+const getRandomNumber = ( min, max, step = 100 ) => {
+  const steps = (max - min) / step;
+  return min + Math.floor(Math.random() * (steps + 1)) * step;
+};
+
 export {
   debounce,
   iosVhFix,
@@ -100,4 +105,5 @@ export {
   formDataToJson,
   disableSubmitBtn,
   enableSubmitBtn,
+  getRandomNumber
 };
