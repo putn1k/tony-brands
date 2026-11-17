@@ -1,3 +1,4 @@
+import ScrollTrigger from 'gsap/ScrollTrigger.js';
 import Swiper from 'swiper';
 import {
   Navigation,
@@ -27,6 +28,7 @@ const initSlider = ( name, options = {} ) => {
 const initSliders = () => {
   document.querySelectorAll( '[ data-slider="carousel" ]' ).forEach( slider => {
     initSlider( slider, sliderConfig.carousel );
+    ScrollTrigger.refresh();
   } );
 };
 
