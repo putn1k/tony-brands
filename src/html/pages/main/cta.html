@@ -1,5 +1,54 @@
 <section class="cta">
   <div class="is-container">
-    <h2 class="h1">Хотите увидеть <span>наши кейсы вживую?</span></h2>
+    <div class="cta__blocks">
+      <div class="cta__imgs">
+        <div class="grid-gallery">
+          <img class="grid-gallery__img grid-gallery__img--main" src="assets/img/other/01.jpg" alt=""  data-anim="fade-right" data-anim-duration="1200" data-anim-delay="600">
+          <img class="grid-gallery__img grid-gallery__img--top" src="assets/img/other/02.jpg" alt=""  data-anim="fade-right" data-anim-duration="1200" data-anim-delay="200">
+          <img class="grid-gallery__img grid-gallery__img--bottom" src="assets/img/other/03.jpg" alt=""  data-anim="fade-up" data-anim-duration="1200" data-anim-delay="900">
+        </div>
+      </div>
+      <div  data-anim="fade-up">
+        <h2 class="h2 cta__title">Хотите увидеть&#32;<span class="cta__alt-color">наши кейсы вживую?</span></h2>
+        <div class="t3 cta__text">
+          <p>Расскажите нам о своей задаче, а мы отправим вам образцы, чтобы вы были уверены в качестве изделий</p>
+          <p>Или приезжайте к нам в офис — покажем все вживую</p>
+        </div>
+        <form class="cta__form" action="#" data-validate id="get-request" autocomplete="off">
+          <input type="hidden" name="Форма" value="Название формы со страницы Главная">
+          <label class="form-field">
+            <input class="form-field__input" type="text" name="Название&nbsp;компании" placeholder="Название компании">
+            <span class="form-field__label">Название компании</span>
+          </label>
+          <label class="form-field">
+            <input class="form-field__input" type="text" name="ИНН" data-validate="inn" placeholder="ИНН" required>
+            <span class="form-field__label">ИНН</span>
+          </label>
+          <label class="form-field">
+            <input class="form-field__input" type="email" name="E-mail" data-validate="email" placeholder="E-mail" required>
+            <span class="form-field__label">E-mail</span>
+          </label>
+          <label class="form-field">
+            <input class="form-field__input" type="tel" name="Телефон" data-validate="phone" placeholder="Телефон" required>
+            <span class="form-field__label">Телефон</span>
+          </label>
+          <label class="form-field">
+            <input class="form-field__input" type="text" name="Адрес&nbsp;доставки" data-validate="adress" placeholder="Адрес доставки" required>
+            <span class="form-field__label">Адрес доставки</span>
+          </label>
+          <label class="form-field">
+            <input class="form-field__input" type="text" name="Сайт" placeholder="Сайт">
+            <span class="form-field__label">Сайт</span>
+          </label>
+          <div class="form-change t-sm cta__form-wide-field">
+            <label>
+              <input class="form-change__input" type="checkbox" data-validate="confirm" required>
+              <span class="form-change__label">@include('../../blocks/confirm-text.html')</span>
+            </label>
+          </div>
+          <button class="btn btn--prim cta__form-submit cta__form-wide-field" type="submit">Оставить заявку</button>
+        </form>
+      </div>
+    </div>
   </div>
 </section>

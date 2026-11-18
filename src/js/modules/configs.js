@@ -75,9 +75,9 @@ const modalConfig = {
 const validateConfig = {
   justValidate: {
     errorFieldCssClass: 'is-invalid',
-    errorLabelCssClass: 'error-massage',
+    errorLabelCssClass: 'error-message',
     errorLabelStyle: {
-      color: 'var(--error)',
+      color: 'var(--error-color)',
       fontSize: '12px',
     },
     errorFormClass: 'shaked',

@@ -1,25 +1,134 @@
 .cta {
   color: var(--white);
   background-color: var(--black);
-  background-image: url('../img/static/gradient.webp');
+  background-image: url('../img/static/gradient-v2.webp');
   background-repeat: no-repeat;
   background-position: top left;
   background-size: cover;
-  padding: 96px 0;
-  //temp
-  height: 600px;
+  padding: 48px 0;
+  position: relative;
+  overflow: hidden;
 
+  &::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 0;
+    background-image: url('../img/static/bg-shirt.webp');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    aspect-ratio: 1 / 1;
+    width: 620px;
+    height: 100%;
+    transform: rotateZ(-14deg) translate(25%, 45%);
+    isolation: isolate;
+  }
+
+  @include media-min ( $md ) {
+    padding: 64px 0;
+
+    &::before {
+      width: 940px;
+      transform: rotateZ(-14deg) translate(25%, 65%);
+    }
+  }
 
   @include media-min ( $lg ) {
+    padding: 96px 0;
+
+    &::before {
+      transform: rotateZ(-14deg) translate(20%, 65%);
+    }
+  }
+
+  @include media-min ( $xl ) {
     padding: 128px 0;
+
+    &::before {
+      transform: rotateZ(-14deg) translate(0, 50%);
+    }
   }
 
   &__alt-color {
     color: var(--gray);
   }
 
+  &__blocks {
+    @include media-min ( $lg ) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 48px;
+    }
+
+    @include media-min ( $xl ) {
+      grid-template-columns: 753px 1fr;
+      column-gap: 64px;
+    }
+  }
+
+  &__imgs {
+    display: none;
+
+    @include media-min ( $lg ) {
+      display: block;
+    }
+  }
+
   &__title {
     margin: 0;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
+
+    @include media-min ( $xl ) {
+      margin-bottom: 32px;
+    }
+  }
+
+  &__text {
+    @include crop-offset;
+
+    margin-bottom: 24px;
+
+    @include media-min ( 1440 ) {
+      margin-bottom: 32px;
+    }
+
+    @include media-min ( $xl ) {
+      margin-bottom: 64px;
+    }
+  }
+
+  &__form {
+    display: grid;
+    gap: 8px;
+
+    @include media-min ( $md ) {
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 20px;
+    }
+
+    @include media-min ( 1440 ) {
+      row-gap: 16px;
+    }
+
+    @include media-min ( 1440 ) {
+      row-gap: 24px;
+    }
+  }
+
+  &__form-submit {
+    margin-top: 24px;
+
+    @include media-min ( $xl ) {
+      margin-top: 32px;
+      padding: 12px 32px;
+    }
+  }
+
+  &__form-wide-field {
+    @include media-min ( $md ) {
+      grid-column: span 2;
+    }
   }
 }
