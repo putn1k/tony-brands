@@ -24,7 +24,7 @@
     @include media-min ( $lg ) {
       display: block;
     }
-    @include media-min ( 1440 ) {
+    @include media-min ( $lg-e ) {
       display: inline;
     }
   }

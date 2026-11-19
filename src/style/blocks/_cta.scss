@@ -90,7 +90,7 @@
 
     margin-bottom: 24px;
 
-    @include media-min ( 1440 ) {
+    @include media-min ( $lg-e ) {
       margin-bottom: 32px;
     }
 
@@ -108,11 +108,11 @@
       column-gap: 20px;
     }
 
-    @include media-min ( 1440 ) {
+    @include media-min ( $lg-e ) {
       row-gap: 16px;
     }
 
-    @include media-min ( 1440 ) {
+    @include media-min ( $xl ) {
       row-gap: 24px;
     }
   }

@@ -77,19 +77,19 @@ input[type="file"].visually-hidden {
   padding-left: var(--container-gap);
   padding-right: var(--container-gap);
 
-  @include media-min($md) {
+  @include media-min( $md ) {
     --container-gap: 20px;
   }
 
-  @include media-min($lg) {
+  @include media-min( $lg ) {
     max-width: 1244px;
   }
 
-  @include media-min(1440) {
+  @include media-min( $lg-e ) {
     max-width: 1336px;
   }
 
-  @include media-min($xl) {
+  @include media-min( $xl ) {
     max-width: 1760px;
   }
 }
