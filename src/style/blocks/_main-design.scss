@@ -1,0 +1,152 @@
+.main-design {
+  padding: 64px 0;
+
+
+  @include media-min ( $xl ) {
+    padding: 96px 0;
+  }
+
+  &__alt-color {
+    color: var(--gray);
+  }
+
+  &__title {
+    margin: 0;
+    margin-bottom: 24px;
+    max-width: 620px;
+
+    @include media-min ( $lg ) {
+      margin-bottom: 32px;
+      max-width: 900px;
+    }
+
+    @include media-min ( $xl ) {
+      margin-bottom: 48px;
+      max-width: 1300px;
+    }
+  }
+
+  &__subtitle {
+    margin: 0;
+    max-width: 620px;
+
+    @include media-min ( $lg ) {
+      max-width: 900px;
+    }
+
+    @include media-min ( $xl ) {
+      max-width: 1300px;
+    }
+  }
+
+  &__text {
+    display: none;
+
+    @include media-min ( $md ) {
+      display: block;
+      color: var(--gray-dark);
+      margin: 0;
+      margin-top: 8px;
+      max-width: 620px;
+    }
+
+    @include media-min ( $xl ) {
+      max-width: 900px;
+    }
+  }
+
+  &__imgs {
+    --slides-gap: 4px;
+
+    padding: 24px 0;
+
+    @include media-min ( $md ) {
+      --slides-gap: 6px;
+    }
+
+    @include media-min ( $lg ) {
+      --slides-gap: 6px;
+
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--slides-gap);
+      align-items: center;
+      padding: 32px 0;
+    }
+
+    @include media-min ( $xl ) {
+      --slides-gap: 8px;
+    }
+  }
+
+  &__sliders {
+    display: grid;
+    grid-template-columns: 100fr 175fr 100fr;
+    align-items: center;
+    gap: var(--slides-gap);
+
+    &--hide-on-mobile {
+      display: none;
+
+      @include media-min ( $lg ) {
+        display: grid;
+      }
+    }
+  }
+
+  &__slider {
+    --b-radius: 8px;
+
+    border-radius: var(--b-radius);
+    &--left {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    &--right {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    @include media-min ( $md ) {
+      --b-radius: 15px;
+    }
+
+    @include media-min ( $xl ) {
+      --b-radius: 20px;
+    }
+
+    & img {
+      display: block;
+      height: auto;
+    }
+  }
+
+  &__btn {
+    --link-line: transparent;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--gray);
+
+    @include any-hover {
+      &:hover {
+        --arrow-x: 8px;
+      }
+    }
+
+    & span {
+      white-space: nowrap;
+    }
+
+    & svg {
+      width: calc(1.4em * (53 / 16));
+      height: 1.4em;
+      flex-shrink: 0;
+      margin-left: 1.4em;
+      transition: var(--duration-default);
+      transition-property: transform;
+      transform: translateX(var(--arrow-x, 0));
+    }
+  }
+}

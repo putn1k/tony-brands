@@ -28,29 +28,16 @@ const sliderConfig = {
       modifier: 1,
     },
   },
-  banner: {
-    spaceBetween: 0,
-    rewind: true,
-  },
-  gallery: {
-    slidesPerView: 1.2,
-    spaceBetween: 2,
-    rewind: true,
-    breakpoints: {
-      1024: {
-        slidesPerView: 1.5,
-      },
-    },
-  },
-  galleryCentered: {
-    slidesPerView: 1.1,
-    spaceBetween: 2,
-    centeredSlides: true,
+  fade: {
     loop: true,
-    breakpoints: {
-      1024: {
-        slidesPerView: 1.5,
-      },
+    effect: 'fade',
+    autoplay: {
+      delay: 5000,
+    },
+    speed: 800,
+    allowTouchMove: false,
+    fadeEffect: {
+      crossFade: true,
     },
   },
 };

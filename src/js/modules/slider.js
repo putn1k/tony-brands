@@ -3,6 +3,7 @@ import Swiper from 'swiper';
 import {
   Navigation,
   Autoplay,
+  EffectFade,
   EffectCoverflow,
 } from 'swiper/modules';
 
@@ -11,7 +12,7 @@ import { getRandomNumber } from "./utils.js";
 
 const initSlider = ( name, options = {} ) => {
   const defaultConfig = Object.assign( {}, {
-    modules: [ Navigation, Autoplay, EffectCoverflow ],
+    modules: [ Navigation, Autoplay, EffectFade, EffectCoverflow ],
   }, sliderConfig.default );
   const customConfig = Object.assign( defaultConfig, options );
 
@@ -28,8 +29,11 @@ const initSlider = ( name, options = {} ) => {
 const initSliders = () => {
   document.querySelectorAll( '[ data-slider="carousel" ]' ).forEach( slider => {
     initSlider( slider, sliderConfig.carousel );
-    ScrollTrigger.refresh();
   } );
+  document.querySelectorAll( '[ data-slider="fade" ]' ).forEach( slider => {
+    initSlider( slider, sliderConfig.fade );
+  } );
+  ScrollTrigger.refresh();
 };
 
 export {
