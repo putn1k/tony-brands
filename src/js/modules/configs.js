@@ -34,7 +34,7 @@ const sliderConfig = {
     autoplay: {
       delay: 5000,
     },
-    speed: 800,
+    speed: 2500,
     allowTouchMove: false,
     fadeEffect: {
       crossFade: true,

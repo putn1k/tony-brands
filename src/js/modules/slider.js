@@ -8,7 +8,12 @@ import {
 } from 'swiper/modules';
 
 import { sliderConfig } from './configs.js';
-import { getRandomNumber } from "./utils.js";
+
+const getStartDelay = (element) => {
+  const delay = parseInt(element.getAttribute('data-start-delay'), 10);
+
+  return Number.isFinite(delay) && delay > 0 ? delay : 0;
+};
 
 const initSlider = ( name, options = {} ) => {
   const defaultConfig = Object.assign( {}, {
@@ -27,12 +32,40 @@ const initSlider = ( name, options = {} ) => {
 };
 
 const initSliders = () => {
+  const disabledFadeSliders = [];
+
+
   document.querySelectorAll( '[ data-slider="carousel" ]' ).forEach( slider => {
     initSlider( slider, sliderConfig.carousel );
   } );
+
   document.querySelectorAll( '[ data-slider="fade" ]' ).forEach( slider => {
-    initSlider( slider, sliderConfig.fade );
+
+    const swiper = initSlider(slider, {
+      ...sliderConfig.fade,
+      autoplay: {
+        disableOnInteraction: false,
+      },
+    });
+
+    if ( swiper ) {
+      swiper.autoplay.stop();
+      disabledFadeSliders.push(swiper);
+    }
   } );
+
+  disabledFadeSliders.forEach( ( swiper ) => {
+    const delay = getStartDelay( swiper.el );
+
+    if (delay === 0) {
+      swiper.autoplay.start();
+      return;
+    }
+
+    setTimeout(() => {
+      swiper.autoplay.start();
+    }, delay );
+  });
   ScrollTrigger.refresh();
 };
 
