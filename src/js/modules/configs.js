@@ -12,7 +12,7 @@ const sliderConfig = {
   carousel: {
     allowTouchMove: false,
     autoplay: {
-      delay: 5000,
+      delay: 3000,
     },
     loop: true,
     slidesPerView: 1.8,
