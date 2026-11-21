@@ -1,6 +1,10 @@
 .hero {
   color: var(--white);
   background-color: var(--red);
+  background-repeat: no-repeat;
+  background-position: left 20% top;
+  background-size: cover;
+  background-image: var(--bg-src, none);
   padding-top: 64px;
   padding-bottom: 64px;
   min-height: 678px;
