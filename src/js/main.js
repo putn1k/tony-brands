@@ -10,6 +10,7 @@ import {
 import {
   validateForms
 } from './modules/validate.js';
+import { initStories } from './modules/stories.js';
 
 document.addEventListener( 'DOMContentLoaded', () => {
   initSiteSettings();
@@ -18,5 +19,6 @@ document.addEventListener( 'DOMContentLoaded', () => {
   window.addEventListener( 'load', () => {
     validateForms();
     initSliders();
+    initStories();
   } );
 } );

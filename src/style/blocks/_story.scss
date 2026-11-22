@@ -1,0 +1,53 @@
+.story {
+  --size: 120px;
+  --ring: 5px;
+  --gap: 12;
+  --color-unread: #ff4603;
+  --color-read: #868686;
+  --cover-offset: 7px;
+
+  --segments: 1;
+  --read-count: 0;
+  --cover-pos: calc(var(--ring) + var(--cover-offset, 0));
+
+  position: relative;
+  display: inline-flex;
+  width: var(--size);
+  height: var(--size);
+  transform: rotateZ(3deg);
+
+  &:not(.is-inited) {
+    display: none;
+  }
+
+  &__bg {
+    position: absolute;
+    inset: var(--cover-pos);
+    background: #ccc;
+    border-radius: 50%;
+    z-index: 1;
+  }
+
+  &__cover {
+    position: absolute;
+    display: block;
+    z-index: 1;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotateZ(-3deg);
+  }
+
+  &__ring {
+    position: absolute;
+    inset: 0;
+    transform: rotate(-90deg);
+    z-index: 2;
+
+    & circle {
+      fill: none;
+      stroke-width: var(--ring);
+      stroke-linecap: round;
+    }
+  }
+}
