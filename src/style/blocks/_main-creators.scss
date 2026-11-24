@@ -18,9 +18,11 @@
     }
   }
 
-  &__accent-text {
+  &__alt-color {
     color: var(--gray-light);
+  }
 
+  &__heading-breaker {
     @include media-min ( $lg ) {
       display: block;
     }

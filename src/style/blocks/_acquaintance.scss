@@ -1,0 +1,30 @@
+.acquaintance {
+  padding: 64px 0;
+
+  @include media-min ( $xl ) {
+    padding: 96px 0;
+  }
+
+  &__alt-color {
+    color: var(--gray-light);
+  }
+
+  &__title {
+    margin: 0;
+    margin-bottom: 24px;
+
+    @include media-min ( $lg ) {
+      margin-bottom: 32px;
+    }
+
+    @include media-min ( $xl ) {
+      margin-bottom: 48px;
+    }
+  }
+
+  &__stories {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}

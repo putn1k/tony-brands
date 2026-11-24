@@ -1,9 +1,12 @@
 .story {
-  --size: 120px;
+  // --size: 120px;
+  // --cover-offset: 7px;
+
+  --size: 60px;
   --ring: 3px;
-  --color-unread: #ff4603;
-  --color-read: #868686;
-  --cover-offset: 7px;
+  --color-unread: var(--red);
+  --color-read: var(--gray);
+  --cover-offset: 2px;
   --cover-pos: calc(var(--ring) + var(--cover-offset, 0));
 
   position: relative;
@@ -16,13 +19,13 @@
   overflow: hidden;
 
   &:not(.is-inited) {
-    display: none;
+    // display: none;
   }
 
   &__bg {
     position: absolute;
     inset: var(--cover-pos);
-    background-color: #cccccc;
+    background-color: var(--gray);
     border-radius: 50%;
     z-index: 1;
   }

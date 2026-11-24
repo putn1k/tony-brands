@@ -34,8 +34,9 @@ const createSegments = ( story ) => {
   let paths = '';
 
   for (let i = 0; i < segs; i++) {
-    const offset = -(i * segPx) - 2.5;
+    const offset = segs == 1 ? 0 : -(i * segPx) - 2.5;
     const color = i < read ? 'var(--color-read)' : 'var(--color-unread)';
+
 
     paths += `<circle cx="60" cy="60" r="55" stroke="${color}" stroke-dasharray="${dash} ${C}" stroke-dashoffset="${offset}"></circle>`;
   }
