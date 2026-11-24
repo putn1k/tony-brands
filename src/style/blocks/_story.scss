@@ -1,20 +1,19 @@
 .story {
   --size: 120px;
-  --ring: 5px;
-  --gap: 12;
+  --ring: 3px;
   --color-unread: #ff4603;
   --color-read: #868686;
   --cover-offset: 7px;
-
-  --segments: 1;
-  --read-count: 0;
   --cover-pos: calc(var(--ring) + var(--cover-offset, 0));
 
   position: relative;
   display: inline-flex;
   width: var(--size);
   height: var(--size);
-  transform: rotateZ(3deg);
+  transform: rotateZ(2deg);
+  cursor: pointer;
+  border-radius: 50%;
+  overflow: hidden;
 
   &:not(.is-inited) {
     display: none;
@@ -23,7 +22,7 @@
   &__bg {
     position: absolute;
     inset: var(--cover-pos);
-    background: #ccc;
+    background-color: #cccccc;
     border-radius: 50%;
     z-index: 1;
   }
@@ -35,7 +34,7 @@
     border-radius: 50%;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) rotateZ(-3deg);
+    transform: translate(-50%, -50%) rotateZ(-2deg);
   }
 
   &__ring {
