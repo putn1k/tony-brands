@@ -1,0 +1,132 @@
+.workprocess {
+  color: var(--white);
+  background-color: var(--black);
+  background-image: url('../img/gradients/gradient-v2.webp');
+  background-repeat: no-repeat;
+  background-position: top left;
+  background-size: cover;
+  padding: 48px 0;
+
+  @include media-min ( $md ) {
+    padding: 64px 0;
+  }
+
+  @include media-min ( $lg ) {
+    padding: 96px 0;
+  }
+
+  @include media-min ( $xl ) {
+    padding: 128px 0;
+  }
+
+  &__alt-color {
+    color: var(--gray);
+  }
+
+  &__title {
+    margin: 0;
+    margin-bottom: 24px;
+
+    @include media-min ( $xl ) {
+      margin-bottom: 32px;
+    }
+  }
+
+  &__text {
+    @include crop-offset;
+
+    margin-bottom: 24px;
+
+    @include media-min ( $lg-e ) {
+      margin-bottom: 32px;
+    }
+
+    @include media-min ( $xl ) {
+      margin-bottom: 64px;
+    }
+  }
+
+  &__list {
+    @include list-reset;
+
+    counter-reset: worklist;
+  }
+
+  &__item {
+    position: relative;
+    padding: 14px 0;
+    counter-increment: worklist;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid var(--gray);
+    }
+
+    &::before {
+      content: '0'counter(worklist);
+      font-size: 1.8rem;
+      line-height: 1.1;
+      font-weight: 700;
+      position: absolute;
+      top: 14px;
+      left: 0;
+      color: var(--gray);
+    }
+
+    @include media-min ( $md ) {
+      display: flex;
+      align-items: flex-start;
+
+      &::before {
+        font-size: 2.4rem;
+      }
+    }
+
+    @include media-min ( $lg ) {
+      padding: 24px 0;
+      &::before {
+        top: 24px;
+      }
+    }
+
+    @include media-min ( $xl ) {
+      padding: 32px 0;
+      &::before {
+        font-size: 3.4rem;
+        top: 32px;
+      }
+    }
+  }
+
+  &__item-title {
+    --slash-color: currentColor;
+
+    margin: 0;
+    margin-bottom: 8px;
+    margin-left: 32px;
+
+    @include media-min ( $md ) {
+      width: 100%;
+      max-width: 240px;
+      margin: 0 64px;
+    }
+
+    @include media-min ( $lg ) {
+      margin: 0 280px;
+      max-width: 260px;
+    }
+
+    @include media-min ( $xl ) {
+      margin: 0 360px;
+      max-width: 320px;
+    }
+  }
+
+  &__item-text {
+    margin: 0;
+    color: var(--gray);
+
+    @include media-min ( $md ) {
+      color: var(--white);
+    }
+  }
+}
