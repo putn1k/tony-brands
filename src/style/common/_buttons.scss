@@ -41,4 +41,15 @@
       }
     }
   }
+
+  &--accent {
+    color: var(--white);
+    background-color: var(--red);
+
+    @include any-hover {
+      &:hover {
+        background-color: var(--black);
+      }
+    }
+  }
 }
