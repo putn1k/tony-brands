@@ -64,8 +64,19 @@
   }
 
   &__card {
+    width: 260px;
+    aspect-ratio: 5 / 3;
+
     &:not(:last-child) {
       margin-right: 20px;
+    }
+
+    @include media-min ( $md ) {
+      width: 375px;
+    }
+
+    @include media-min ( $xl ) {
+      width: 500px;
     }
   }
 

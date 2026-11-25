@@ -7,18 +7,14 @@
   padding-right: 48px;
   color: var(--black);
   background-color: var(--white);
-  width: 260px;
-  aspect-ratio: 5 / 3;
   border-radius: 8px;
 
   @include media-min ( $md ) {
     padding: 24px;
     padding-right: 64px;
-    width: 375px;
   }
 
   @include media-min ( $xl ) {
-    width: 500px;
     padding: 32px;
     padding-right: 96px;
   }

@@ -1,0 +1,75 @@
+.main-blog {
+  color: var(--white);
+  background-color: var(--black);
+  background-image: url('../img/gradients/gradient-v4.webp');
+  background-repeat: no-repeat;
+  background-position: top left;
+  background-size: cover;
+  padding: 48px 0;
+
+  @include media-min ( $md ) {
+    padding: 64px 0;
+
+  }
+
+  @include media-min ( $lg ) {
+    padding: 96px 0;
+  }
+
+  @include media-min ( $xl ) {
+    padding: 128px 0;
+  }
+
+  &__alt-color {
+    color: var(--gray);
+  }
+
+  &__title {
+    margin: 0;
+    margin-bottom: 24px;
+
+    @include media-min ( $xl ) {
+      margin-bottom: 32px;
+    }
+  }
+
+  &__subtitle {
+    margin: 0;
+    margin-bottom: 24px;
+
+    @include media-min ( $xl ) {
+      margin-bottom: 32px;
+    }
+  }
+
+  &__list {
+    @include list-reset;
+
+    display: flex;
+    overflow-x: auto;
+    margin: 0 -4px;
+
+    @include media-min ( $lg ) {
+      overflow-x: visible;
+      margin: 0 -10px;
+    }
+  }
+
+  &__item {
+    margin: 0 4px;
+    width: 310px;
+    flex-shrink: 0;
+    aspect-ratio: 3 / 2;
+
+    @include media-min ( $md ) {
+      width: 340px;
+    }
+
+    @include media-min ( $lg ) {
+      width: auto;
+      flex-basis: 100%;
+      flex-shrink: 1;
+      margin: 0 10px;
+    }
+  }
+}

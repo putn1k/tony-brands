@@ -48,8 +48,43 @@
 
     @include any-hover {
       &:hover {
-        background-color: var(--black);
+        background-color: var(--gray-dark);
       }
     }
+  }
+}
+
+.btn-gray-arrow {
+  --link-line: transparent;
+
+  @include btn-reset;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  color: var(--gray-light);
+  background-color: var(--gray-dark);
+
+  @include any-hover {
+    &:hover {
+      --arrow-x: 8px;
+    }
+  }
+
+  & svg {
+    max-height: 1.34em;
+    aspect-ratio: 53 / 16;
+    transition: var(--duration-default);
+    transition-property: transform;
+    transform: translateX(var(--arrow-x, 0));
+  }
+
+  @include media-min ( $lg ) {
+    padding: 10px 16px;
+  }
+
+  @include media-min ( $xl ) {
+    padding: 12px 32px;
   }
 }
