@@ -1,2 +1,76 @@
 .site-footer {
+  color: var(--gray);
+  background-color: var(--black);
+  border-top: 1px solid var(--gray);
+  padding-top: 48px;
+  padding-bottom: 16px;
+
+  &__contacts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 20px;
+    row-gap: 16px;
+  }
+
+  &__contact {
+    margin: 0;
+
+    &--wide {
+      grid-column: span 2;
+    }
+
+    &--list {
+      display: grid;
+      row-gap: 8px;
+    }
+
+    &--ralign {
+      justify-items: end;
+    }
+
+    & p {
+        margin: 0;
+    }
+
+    & a {
+      --link-line: transparent;
+
+      @include any-hover {
+        transition: var(--duration-default);
+        transition-property: color;
+
+        &:hover {
+          color: var(--red);
+        }
+      }
+    }
+  }
+
+  &__menu {
+    & ul {
+      @include list-reset;
+    }
+
+    & a {
+      --link-line: transparent;
+
+      @include any-hover {
+        transition: var(--duration-default);
+        transition-property: color;
+
+        &:hover {
+          color: var(--red);
+        }
+      }
+    }
+  }
+
+  &__cropped-logo {
+    overflow: hidden;
+    aspect-ratio: 375 / 33;
+    & img {
+      display: block;
+      width: 100%;
+    }
+  }
 }

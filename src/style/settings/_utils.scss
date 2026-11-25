@@ -148,3 +148,9 @@ input[type="file"].visually-hidden {
     color: var(--slash-color, var(--red));
   }
 }
+
+.is-starnote {
+  &::after {
+    content: '*';
+  }
+}
