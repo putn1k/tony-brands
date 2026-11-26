@@ -1,6 +1,5 @@
 .story {
   // --size: 120px;
-  // --cover-offset: 7px;
 
   --size: 60px;
   --ring: 3px;
@@ -17,9 +16,21 @@
   cursor: pointer;
   border-radius: 50%;
   overflow: hidden;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
 
   &:not(.is-inited) {
-    // display: none;
+    opacity: 0;
+  }
+
+  @include media-min ( $md ) {
+    --size: 96px;
+    --cover-offset: 7px;
+  }
+
+  @include media-min ( $xl ) {
+    --size: 120px;
+    --cover-offset: 7px;
   }
 
   &__bg {

@@ -1,44 +1,48 @@
 <footer class="site__bottom">
   <div class="site-footer">
     <div class="is-container t3">
-      <div class="site-footer__contacts">
-        <p class="site-footer__contact site-footer__contact--wide">г. Москва, ул. Бутлерова, 17Б</p>
-        <div class="site-footer__contact site-footer__contact--list">
-          <p><a href="tel:+74951289596">+7 (495) 128 95 96</a></p>
-          <p><a href="tel:+79936935250">+7 (993) 693 52 50</a></p>
+      <div class="site-footer__cols">
+        <div>
+          <div class="site-footer__contacts">
+            <p class="site-footer__contact site-footer__contact--wide">г. Москва, ул. Бутлерова, 17Б</p>
+            <div class="site-footer__contact site-footer__contact--list">
+              <p><a href="tel:+74951289596">+7 (495) 128 95 96</a></p>
+              <p><a href="tel:+79936935250">+7 (993) 693 52 50</a></p>
+            </div>
+            <p class="site-footer__contact site-footer__contact--list site-footer__contact--ralign">
+              <span>пн-пт:</span>
+              <span>9:00-19:00 мск</span>
+            </p>
+            <p class="site-footer__contact site-footer__contact--wide"><a href="mailto:welcome@tonybrands.ru">welcome@tonybrands.ru</a></p>
+          </div>
+          <nav class="site-footer__icons-nav">
+            <ul>
+              <li>@include('iconed-contact.html', {icon: 'mmax-inv', title: 'Max', link: '#', isHideTitle: true})</li>
+              <li>@include('iconed-contact.html', {icon: 'tg-inv', title: 'Telegram', link: '#', isHideTitle: true})</li>
+              <li class="is-starnote" title="Запрещен в России, принадлежит компании Meta">@include('iconed-contact.html', {icon: 'inst-inv', title: 'Instagram', link: '#', isHideTitle: true})</li>
+              <li>@include('iconed-contact.html', {icon: 'bhnc-inv', title: 'Behance', link: '#', isHideTitle: true})</li>
+              <li>@include('iconed-contact.html', {icon: 'ptrs-inv', title: 'Pinterest', link: '#', isHideTitle: true})</li>
+              <li>@include('iconed-contact.html', {icon: 'dprf-inv', title: 'Dprofile', link: '#', isHideTitle: true})</li>
+            </ul>
+          </nav>
         </div>
-        <p class="site-footer__contact site-footer__contact--list site-footer__contact--ralign">
-          <span>пн-пт:</span>
-          <span>9:00-19:00 мск</span>
-        </p>
-        <p class="site-footer__contact site-footer__contact--wide"><a href="mailto:welcome@tonybrands.ru">welcome@tonybrands.ru</a></p>
+        <nav class="site-footer__nav">
+          @include('nav-footer.html')
+        </nav>
       </div>
-      <nav class="site-footer__menu site-footer__menu--grid">
-        <ul>
-          <li><a href="#">Max</a></li>
-          <li><a href="#">Telegram</a></li>
-          <li><a class="is-starnote" href="#">Instagram</a></li>
-          <li><a href="#">Behance</a></li>
-          <li><a href="#">Pinterest</a></li>
-          <li><a href="#">Dprofile</a></li>
-        </ul>
-      </nav>
-      <nav class="site-footer__menu">
-        <ul>
-          <li><a href="#">Поставщикам</a></li>
-          <li><a href="#">Реферальная программа</a></li>
-          <li><a href="#">Реквизиты</a></li>
-          <li><a href="#">Способы оплаты</a></li>
-        </ul>
-      </nav>
     </div>
     <div class="site-footer__cropped-logo">
       <img src="assets/img/static/tony.svg" alt="tony">
     </div>
     <div class="is-container">
-      <p>2026 TONY Все права защищены</p>
-      <p>*запрещен в России, принадлежит компании Meta</p>
-      <p><a href="#">Политика конфиденциальности</a></p>
+      <div class="site-footer__bottom">
+        <p>&copy; 2026 TONY Все права защищены</p>
+        <div class="site-footer__bottom-links">
+          <p><a href="#">Политика конфиденциальности</a></p>
+          <p><a href="#">Соглашение на обработку персональных данных</a></p>
+        </div>
+      </div>
+      <p class="site-footer__disclaimer t-sm is-starnote-link">Запрещен в России, принадлежит компании Meta</p>
     </div>
   </div>
 </footer>

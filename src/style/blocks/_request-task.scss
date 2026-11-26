@@ -1,19 +1,18 @@
 .request-task {
-  display: none;
+  text-align: center;
+  color: var(--white);
+  background-color: var(--black);
+  padding: 48px 16px;
+  border-radius: 20px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 
   @include media-min ( $lg ) {
-    display: block;
-    text-align: center;
-    color: var(--white);
-    background-color: var(--black);
-    padding: 64px 0;
-    border-radius: 20px;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+    padding: 64px 16px;
+  }
 
-    @include media-min ( $xl ) {
-      padding: 96px 0;
-    }
+  @include media-min ( $xl ) {
+    padding: 96px 16px;
   }
 
   &__alt-color {
@@ -47,5 +46,9 @@
 
   &__btn {
     margin-top: 64px;
+
+    @include media-min ( $lg ) {
+      padding: 14px 48px;
+    }
   }
 }

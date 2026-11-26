@@ -1,12 +1,23 @@
 .acquaintance {
   padding: 64px 0;
 
+  @include media-min ( $lg ) {
+    background-image: url('../img/static/stories-bg.webp');
+    background-repeat: no-repeat;
+    background-position: center right;
+    background-size: contain;
+  }
+
   @include media-min ( $xl ) {
     padding: 96px 0;
   }
 
   &__alt-color {
     color: var(--gray-light);
+  }
+
+  &__alt-color-dark {
+    color: var(--gray-dark);
   }
 
   &__title {
@@ -23,8 +34,40 @@
   }
 
   &__stories {
-    display: flex;
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 12px;
+    max-width: 400px;
+
+    @include media-min ( $md ) {
+      max-width: none;
+      display: flex;
+    }
+
+    @include media-min ( $lg ) {
+      gap: 24px;
+    }
+  }
+
+  &__story {
+    margin: 0;
+    text-align: center;
+    color: var(--gray-dark);
+
+    @include media-min ( $md ) {
+      max-width: 96px;
+    }
+
+    @include media-min ( $xl ) {
+      max-width: 120px;
+    }
+  }
+
+  &__text-block {
+    max-width: 575px;
+
+    @include media-min ( $xl ) {
+      max-width: 815px;
+    }
   }
 }

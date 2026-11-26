@@ -9,7 +9,6 @@
 
   @include media-min ( $md ) {
     padding: 64px 0;
-
   }
 
   @include media-min ( $lg ) {
@@ -47,11 +46,11 @@
 
     display: flex;
     overflow-x: auto;
-    margin: 0 -4px;
+    margin: 48px -4px 0;
 
     @include media-min ( $lg ) {
       overflow-x: visible;
-      margin: 0 -10px;
+      margin: 64px -10px 0;
     }
   }
 

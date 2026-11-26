@@ -5,11 +5,40 @@
   padding-top: 48px;
   padding-bottom: 16px;
 
+  @include media-min ( $lg ) {
+    padding-top: 64px;
+  }
+
+  @include media-min ( $xl ) {
+    padding-top: 96px;
+  }
+
+  &__cols {
+    @include media-min ( $md ) {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    @include media-min ( $lg ) {
+      margin-bottom: 24px;
+    }
+  }
+
   &__contacts {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    align-items: start;
     column-gap: 20px;
     row-gap: 16px;
+
+    @include media-min ( $md ) {
+      row-gap: 24px;
+    }
+
+    @include media-min ( $lg ) {
+      max-width: 512px;
+    }
   }
 
   &__contact {
@@ -46,9 +75,14 @@
     }
   }
 
-  &__menu {
+  &__nav {
+    margin: 32px 0;
+
     & ul {
       @include list-reset;
+
+      display: grid;
+      row-gap: 8px;
     }
 
     & a {
@@ -63,14 +97,125 @@
         }
       }
     }
+
+    @include media-min ( $md ) {
+      margin: 0;
+      text-align: right;
+
+      & ul {
+        row-gap: 16px;
+      }
+    }
+
+    @include media-min ( $lg ) {
+      & ul {
+        row-gap: 24px;
+      }
+    }
+  }
+
+  &__icons-nav {
+    margin: 32px 0;
+
+    & ul {
+      @include list-reset;
+
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 400px;
+    }
+
+    & li {
+      color: var(--white);
+
+      &:focus-within {
+        color: var(--red);
+      }
+    }
+
+    & svg {
+      width: 42px;
+      height: 42px;
+      transition: var(--duration-fast);
+      transition-property: color;
+
+      @include any-hover {
+        &:hover {
+          color: var(--red);
+        }
+      };
+    }
+
+    @include media-min ( $md ) {
+      & ul {
+        gap: 20px;
+      }
+    }
+
+    @include media-min ( $lg ) {
+      margin: 48px 0;
+
+       ul {
+        gap: 48px;
+        max-width: none;
+      }
+    }
+
+    @include media-min ( $xl ) {
+      margin: 64px 0;
+
+      & svg {
+        width: 60px;
+        height: 60px;
+      }
+    }
   }
 
   &__cropped-logo {
     overflow: hidden;
     aspect-ratio: 375 / 33;
+
     & img {
       display: block;
       width: 100%;
     }
+  }
+
+  &__bottom {
+    color: var(--gray-dark);
+
+    & a {
+      @include any-hover {
+        transition: var(--duration-default);
+        transition-property: color;
+
+        &:hover {
+          color: var(--white);
+        }
+      }
+    }
+
+    @include media-min ( $lg ) {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  &__bottom-links {
+    @include media-min ( $md ) {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    @include media-min ( $lg ) {
+      flex-basis: 66%;
+    }
+  }
+
+  &__disclaimer {
+    color: var(--gray-dark);
   }
 }
