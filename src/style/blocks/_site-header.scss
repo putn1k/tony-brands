@@ -40,5 +40,16 @@
       padding: 16px 0;
     }
   }
+
+  &__widget-wrapper {
+    position: relative;
+  }
+
+  &__widget {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    z-index: 30;
+  }
 }
 

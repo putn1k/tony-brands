@@ -1,0 +1,33 @@
+.contacts-widget {
+  color: var(--black);
+  background-color: var(--white);
+  display: none;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+
+  &.is-show {
+    @include anim(popupBounce, 0.3s);
+
+    display: block;
+  }
+
+  &__top {
+    padding: 8px 24px;
+    text-align: right;
+    color: var(--white);
+    background-color: var(--black);
+    box-shadow: 0 -1px 0 0.5px var(--black);
+  }
+
+  &__close {
+    @include btn-reset;
+  }
+
+  &__list {
+    @include list-reset;
+
+    display: grid;
+    row-gap: 8px;
+    padding: 24px;
+  }
+}
