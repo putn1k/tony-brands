@@ -12,17 +12,4 @@ const initItemObserver = ( targetNode, observeNode, isTrueFn, isFalseFn, config 
   new IntersectionObserver( callback, config ).observe( observeNode );
 };
 
-const scrollTopEl = document.querySelector( '#scroll-top' );
-const siteTopEl = document.querySelector( '#site-top' );
-
-const showScrolTop = () => {
-  scrollTopEl.classList.add( 'scroll-top--show' );
-};
-
-const hideScrolTop = () => {
-  scrollTopEl.classList.remove( 'scroll-top--show' );
-};
-
-export const initScrollObserver = () => {
-  initItemObserver( scrollTopEl, siteTopEl, showScrolTop, hideScrolTop, observerConfig.scrollTop );
-};
+export const initScrollObserver = () => {};
