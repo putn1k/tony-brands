@@ -19,6 +19,7 @@ import {
 } from './gsap.js';
 import { initFilters } from './filter-list.js';
 import { initScrollDirectionObserver } from './scroll-direction.js';
+import { initPopups } from './popup.js';
 
 
 const lenisScroll = new Lenis( smoothScrollConfig.lenis );
@@ -40,6 +41,7 @@ const initSiteSettings = () => {
   initGSAPAnimation();
   requestAnimationFrame( reloadScroll );
   initFilters();
+  initPopups();
 };
 
 export {
