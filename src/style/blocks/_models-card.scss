@@ -18,10 +18,14 @@
   &__img {
     & img {
       border-radius: 8px;
-      opacity: 0.4;
+      opacity: 0;
       transition-duration: 0.75s;
       transition-property: opacity;
       isolation: isolate;
+    }
+
+    &.swiper-slide-visible img {
+      opacity: 0.4;
     }
 
     &.swiper-slide-fully-visible img {
