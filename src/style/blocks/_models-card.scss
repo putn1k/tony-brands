@@ -21,6 +21,7 @@
       opacity: 0.4;
       transition-duration: 0.75s;
       transition-property: opacity;
+      isolation: isolate;
     }
 
     &.swiper-slide-fully-visible img {
