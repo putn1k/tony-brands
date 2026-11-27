@@ -16,19 +16,14 @@
   }
 
   &__img {
-    opacity: 0;
-    transition-property: opacity, transform, -webkit-transform;
-
     & img {
       border-radius: 8px;
-    }
-
-
-    &.swiper-slide-visible {
       opacity: 0.4;
+      transition-duration: 0.75s;
+      transition-property: opacity;
     }
 
-    &.swiper-slide-fully-visible{
+    &.swiper-slide-fully-visible img {
       opacity: 1;
     }
   }

@@ -16,7 +16,6 @@ const sliderConfig = {
     },
     loop: true,
     slidesPerView: 1.8,
-    spaceBetween: 0,
     effect: "coverflow",
     centeredSlides: true,
     speed: 750,
