@@ -20,11 +20,12 @@
     opacity: 0;
     transition-property: opacity, transform, -webkit-transform;;
 
-    &.swiper-slide-visible {
+    &.swiper-slide-visible.swiper-slide-prev,
+    &.swiper-slide-visible.swiper-slide-next {
       opacity: 0.4;
     }
 
-    &.swiper-slide-fully-visible {
+    &.swiper-slide-visible.swiper-slide-active {
       opacity: 1;
     }
   }
