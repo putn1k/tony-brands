@@ -16,16 +16,19 @@
   }
 
   &__img {
-    border-radius: 8px;
     opacity: 0;
-    transition-property: opacity, transform, -webkit-transform;;
+    transition-property: opacity, transform, -webkit-transform;
 
-    &.swiper-slide-visible.swiper-slide-prev,
-    &.swiper-slide-visible.swiper-slide-next {
+    & img {
+      border-radius: 8px;
+    }
+
+
+    &.swiper-slide-visible {
       opacity: 0.4;
     }
 
-    &.swiper-slide-visible.swiper-slide-active {
+    &.swiper-slide-fully-visible{
       opacity: 1;
     }
   }

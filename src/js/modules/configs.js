@@ -24,7 +24,7 @@ const sliderConfig = {
       rotate: 0,
       stretch: 20,
       depth: 500,
-      slideShadows: true,
+      slideShadows: false,
       modifier: 1,
     },
   },
